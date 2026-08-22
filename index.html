@@ -1,0 +1,1342 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#12100E">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="九州馳之旅">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="icon" type="image/png" href="apple-touch-icon.png">
+<title>九州馳之旅 · 2026.09.19–26</title>
+<style>
+/* ===========================================================
+   博多祇園山笠 — poster language
+   墨 ink / 朱 vermilion / 紙 washi paper
+   Display: Hiragino Sans W8 (system, works offline)
+   Eyebrow: Hiragino Mincho ProN — the one serif role
+   =========================================================== */
+:root{
+  --ink:#12100E;
+  --shu:#E03A20;
+  --paper:#FAF7F1;
+  --gray:#6E6862;
+  --hair:#D9D2C7;
+  --pole:#BFB6A8;
+
+  --jp:"Hiragino Sans","Hiragino Kaku Gothic ProN","Yu Gothic","PingFang TC","Microsoft JhengHei",sans-serif;
+  --mincho:"Hiragino Mincho ProN","Yu Mincho","Songti TC",serif;
+  --tc:"PingFang TC","Hiragino Sans",sans-serif;
+  --num:-apple-system,BlinkMacSystemFont,"Helvetica Neue",sans-serif;
+
+  --pad:18px;
+  --rail:52px;   /* timeline gutter */
+}
+@media (prefers-color-scheme:dark){
+  :root{
+    --ink:#F2EDE4;
+    --shu:#FF5236;
+    --paper:#100F0E;
+    --gray:#8F877E;
+    --hair:#2E2A26;
+    --pole:#413A34;
+  }
+}
+
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0; background:var(--paper); color:var(--ink);
+  font-family:var(--jp); font-size:16px; line-height:1.5;
+  overflow-x:hidden;
+}
+body>input{position:absolute;width:1px;height:1px;opacity:0;pointer-events:none}
+
+/* ---------------- masthead ---------------- */
+.mast{
+  display:flex; align-items:baseline; gap:9px;
+  padding:calc(env(safe-area-inset-top) + 14px) var(--pad) 10px;
+}
+.mast .mark{
+  font-size:20px; font-weight:900; letter-spacing:.05em; line-height:1;
+}
+.mast .sub{
+  font-family:var(--num); font-size:11px; font-weight:600;
+  letter-spacing:.14em; color:var(--gray);
+}
+
+/* ---------------- tab rail ---------------- */
+.rail{
+  position:sticky; top:0; z-index:20;
+  display:flex; gap:0; overflow-x:auto; scroll-behavior:smooth;
+  background:var(--paper);
+  border-top:2px solid var(--ink);
+  border-bottom:2px solid var(--ink);
+  scrollbar-width:none;
+}
+.rail::-webkit-scrollbar{display:none}
+.rail label{
+  flex:0 0 auto; cursor:pointer; position:relative;
+  min-width:50px; padding:9px 12px 8px; text-align:center;
+  border-right:1px solid var(--hair);
+  transition:background .16s ease, color .16s ease;
+}
+.rail label .glyph{
+  display:block; font-size:19px; font-weight:900; line-height:1.05;
+}
+.rail label .sm{
+  display:block; font-family:var(--num); font-size:10px; font-weight:600;
+  letter-spacing:.03em; color:var(--gray); margin-top:3px;
+  font-variant-numeric:tabular-nums;
+}
+/* today's marker — independent of which tab is open */
+.rail label.today::before{
+  content:""; position:absolute; inset:0 0 auto 0; height:4px; background:var(--shu);
+}
+
+/* ---------------- day hero: the ink mass ---------------- */
+.hero{
+  position:relative; overflow:hidden;
+  background:var(--ink); color:var(--paper);
+  padding:22px var(--pad) 34px;
+  /* the float leans as it runs */
+  clip-path:polygon(0 0,100% 0,100% calc(100% - 15px),0 100%);
+}
+/* Set vertically as 「一番」…「八番」: 番 anchors every day with the same
+   visual mass, so 一/二/三 don't collapse into featureless bars. Bleeds
+   past the ink block's leaning edge on purpose. */
+.hero .numeral{
+  position:absolute; right:15px; top:4px;
+  writing-mode:vertical-rl; text-orientation:upright; white-space:nowrap;
+  font-size:76px; font-weight:900; line-height:.92;
+  color:var(--shu); letter-spacing:-.07em;
+  pointer-events:none; user-select:none;
+}
+.hero .zone{
+  position:relative; font-family:var(--mincho);
+  font-size:13px; letter-spacing:.22em; color:var(--shu);
+  margin:0 0 6px;
+}
+.hero .md{
+  position:relative; margin:0;
+  font-family:var(--num); font-size:47px; font-weight:800;
+  letter-spacing:-.035em; line-height:.92;
+  font-variant-numeric:tabular-nums;
+}
+.hero .dow{
+  position:relative; margin:5px 0 0;
+  font-size:13px; font-weight:700; letter-spacing:.2em; opacity:.72;
+}
+
+/* ---------------- 宿 — tonight's bed, on every day ---------------- */
+.lodge{
+  display:flex; align-items:flex-start; gap:11px;
+  padding:12px var(--pad) 13px;
+  border-bottom:2px solid var(--ink);
+}
+.lodge .lg{
+  flex:0 0 25px; height:25px; line-height:26px; text-align:center;
+  font-family:var(--mincho); font-size:15px; font-weight:700;
+  color:var(--paper); background:var(--shu);
+}
+.lodge .lb{flex:1; min-width:0}
+/* unscoped: the 手引 lodging card reuses both */
+.lja{
+  font-size:15px; font-weight:800; line-height:1.35;
+  color:var(--ink); text-decoration:none;
+}
+.lzh{
+  font-family:var(--tc); font-size:11.5px; font-weight:400; line-height:1.6;
+  letter-spacing:.03em; color:var(--gray); margin:3px 0 0;
+}
+
+/* ---------------- timeline ---------------- */
+.panels>section{display:none}
+.track{
+  position:relative; padding:22px var(--pad) calc(env(safe-area-inset-bottom) + 56px);
+}
+/* the pole the day hangs on */
+.track::before{
+  content:""; position:absolute; z-index:0;
+  left:calc(var(--pad) + var(--rail)); top:0; bottom:calc(env(safe-area-inset-bottom) + 56px);
+  width:3px; background:var(--pole);
+}
+/* no stops hanging on it, no pole. Self-maintaining — no marker class to
+   remember to strip when a day gets filled in. */
+.track:not(:has(.stop))::before{content:none}
+
+.stop{
+  position:relative; z-index:1;
+  display:flex; gap:0; padding-bottom:26px;
+}
+.stop .t{
+  flex:0 0 var(--rail); padding-right:14px; text-align:right;
+  font-family:var(--num); font-size:15px; font-weight:800;
+  letter-spacing:-.01em; font-variant-numeric:tabular-nums;
+  line-height:1.35;
+}
+.stop .t em{
+  display:block; font-style:normal; font-size:10px; font-weight:600;
+  color:var(--gray); letter-spacing:.06em;
+}
+.stop .c{flex:1; min-width:0; padding-left:17px}
+/* the notch on the pole */
+.stop .c::before{
+  content:""; position:absolute; left:calc(var(--rail) - 3px); top:8px;
+  width:13px; height:3px; background:var(--ink);
+}
+
+.stop .ja{
+  display:inline; font-size:19px; font-weight:800; line-height:1.32;
+  color:var(--ink); text-decoration:none;
+}
+/* a hard deadline — miss it and the trip breaks. Only flights and the
+   times you have to work backwards from. Nothing else earns 朱. */
+.stop.key .t{color:var(--shu)}
+
+/* Loose time. Wayne's note: pinning every hour makes the day un-relaxing.
+   So only genuinely fixed things carry a clock; everything else gets a
+   period of the day, set in mincho so the two never read as the same kind
+   of promise. Ordering still works — see data-at. */
+.stop.flow .t{
+  font-family:var(--mincho); font-size:17px; font-weight:700;
+  letter-spacing:.05em; font-variant-numeric:normal;
+}
+.stop .zh{
+  font-family:var(--tc); font-size:13px; font-weight:400;
+  letter-spacing:.05em; color:var(--gray); margin:4px 0 0;
+}
+.map{
+  display:inline-block; vertical-align:1px; margin-left:8px;
+  font-family:var(--tc); font-size:10px; font-weight:600; letter-spacing:.1em;
+  color:var(--paper); background:var(--shu);
+  padding:2px 5px 1px; text-decoration:none; white-space:nowrap;
+}
+.move,.note{
+  font-size:13px; line-height:1.55; margin:9px 0 0;
+  padding-left:10px; border-left:2px solid var(--hair);
+}
+.move{font-weight:600; letter-spacing:.02em}
+.note{font-family:var(--tc); color:var(--gray); font-weight:400}
+
+/* ---------------- 現在 — the race clock ---------------- */
+.now{
+  position:relative; z-index:2; display:flex; align-items:center; gap:8px;
+  margin:-8px 0 22px -2px; padding-left:calc(var(--rail) - 6px);
+}
+.now .dot{
+  flex:0 0 auto; width:11px; height:11px; background:var(--shu); border-radius:50%;
+  animation:beat 2.4s ease-in-out infinite;
+}
+.now .bar{flex:1; height:2px; background:var(--shu)}
+.now .lbl{
+  flex:0 0 auto; font-family:var(--num); font-size:10px; font-weight:800;
+  letter-spacing:.14em; color:var(--paper); background:var(--shu);
+  padding:2px 6px 1px; font-variant-numeric:tabular-nums;
+}
+@keyframes beat{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(.62);opacity:.55}}
+
+/* ---------------- 手引 (overview) ---------------- */
+.brief{padding:20px var(--pad) calc(env(safe-area-inset-bottom) + 56px)}
+.card{border-top:3px solid var(--ink); padding:12px 0 18px; margin-bottom:6px}
+.card h2{
+  margin:0 0 11px; font-size:14px; font-weight:900; letter-spacing:.2em;
+}
+.card h2 i{
+  font-family:var(--tc); font-style:normal; font-size:10px; font-weight:400;
+  letter-spacing:.1em; color:var(--gray); margin-left:9px;
+}
+.row{display:flex; gap:13px; padding:6px 0; font-size:15px}
+.row dt{
+  flex:0 0 74px; margin:0; font-family:var(--tc); font-size:12px; font-weight:600;
+  color:var(--gray); letter-spacing:.06em; padding-top:3px;
+}
+.row dd{flex:1; margin:0; min-width:0; word-break:break-word; line-height:1.5}
+dl{margin:0}
+/* An action, not a place — outlined like a control so it never reads as one
+   more 地図 badge. Google Maps resolves "near me" from the phone's own
+   location, so no coordinates to keep in sync. */
+.gas{
+  display:flex; align-items:center; gap:10px;
+  margin-top:12px; padding:10px 13px;
+  border:2px solid var(--ink); text-decoration:none; color:var(--ink);
+}
+.gas .gi{
+  flex:0 0 27px; height:27px; line-height:28px; text-align:center;
+  font-family:var(--mincho); font-size:16px; font-weight:700;
+  color:var(--paper); background:var(--shu);
+}
+.gas .gl{
+  font-family:var(--tc); font-size:13.5px; font-weight:700;
+  letter-spacing:.05em; line-height:1.35;
+}
+.gas .gl em{
+  display:block; font-style:normal; font-family:var(--jp);
+  font-size:10.5px; font-weight:600; letter-spacing:.08em;
+  color:var(--gray); margin-top:2px;
+}
+.gas::after{
+  content:"\2192"; margin-left:auto;
+  font-size:15px; font-weight:800; color:var(--shu);
+}
+
+/* Optional stops along a leg — "if you need it", never scheduled. Kept
+   deliberately quieter than a .stop: no clock, hollow badge, pole-coloured
+   notch, grey name. Carries no data-at, so the 現在 line ignores it. */
+.rest{
+  position:relative; z-index:1; display:flex;
+  margin-top:-10px; padding-bottom:22px;
+}
+.rest .rb{flex:0 0 var(--rail); padding-right:14px; text-align:right}
+.rest .rb i{
+  display:inline-block; width:22px; height:22px; line-height:20px;
+  font-style:normal; text-align:center;
+  font-family:var(--mincho); font-size:13px; font-weight:700;
+  color:var(--shu); border:1.5px solid var(--shu);
+}
+.rest .rl{flex:1; min-width:0; padding-left:17px}
+.rest .rl::before{
+  content:""; position:absolute; left:calc(var(--rail) - 1px); top:10px;
+  width:9px; height:2px; background:var(--pole);
+}
+.rest .rl a{
+  display:block; padding:4px 0; text-decoration:none;
+  font-size:14px; font-weight:600; line-height:1.4; color:var(--gray);
+}
+.rest .rl a::before{content:"\25B8\2002"; color:var(--shu); font-weight:800}
+.rest .rl a em{
+  font-style:normal; font-family:var(--tc); font-size:10.5px; font-weight:400;
+  letter-spacing:.08em; margin-left:7px; opacity:.75;
+}
+
+/* a caution that has to survive being skimmed */
+.warn{
+  margin:13px 0 2px; padding:11px 13px 12px;
+  border:1px solid var(--shu); border-left-width:5px;
+  font-family:var(--tc); font-size:12.5px; line-height:1.7; color:var(--ink);
+}
+.warn b{
+  display:block; margin-bottom:5px;
+  font-family:var(--jp); font-size:12px; font-weight:900;
+  letter-spacing:.14em; color:var(--shu);
+}
+a{color:var(--shu)}
+.tel{font-family:var(--num); font-weight:700; font-variant-numeric:tabular-nums; text-decoration:none}
+
+/* the countdown doubles as a "JS is running" canary */
+#clock{
+  display:none; background:var(--ink); color:var(--paper);
+  padding:13px 15px; margin:0 0 20px;
+  clip-path:polygon(0 0,100% 0,100% calc(100% - 9px),0 100%);
+}
+#clock b{
+  display:block; font-family:var(--num); font-size:31px; font-weight:800;
+  letter-spacing:-.03em; line-height:1; font-variant-numeric:tabular-nums;
+}
+#clock span{
+  display:block; font-family:var(--mincho); font-size:11px;
+  letter-spacing:.22em; color:var(--shu); margin-bottom:6px;
+}
+
+/* empty state — an invitation, not a shrug */
+.blank{padding:6px 0 0}
+.blank p{margin:0 0 4px; font-size:15px; font-weight:700}
+.blank small{font-family:var(--tc); font-size:12.5px; color:var(--gray); letter-spacing:.04em}
+
+.todo{color:var(--gray); font-weight:400}
+
+/* ---------------- load + tab-change motion ---------------- */
+.hero .zone,.hero .md,.hero .dow{animation:rise .5s cubic-bezier(.2,.8,.25,1) both}
+.hero .md{animation-delay:.05s}
+.hero .dow{animation-delay:.1s}
+.hero .numeral{animation:charge .62s cubic-bezier(.16,.9,.2,1) both}
+.stop,.rest{animation:rise .42s cubic-bezier(.2,.8,.25,1) both}
+.track>:nth-child(1){animation-delay:.10s}
+.track>:nth-child(2){animation-delay:.15s}
+.track>:nth-child(3){animation-delay:.20s}
+.track>:nth-child(4){animation-delay:.25s}
+.track>:nth-child(5){animation-delay:.30s}
+.track>:nth-child(n+6){animation-delay:.34s}
+@keyframes rise{from{opacity:0;transform:translateY(9px)}to{opacity:1;transform:none}}
+@keyframes charge{from{opacity:0;transform:translateX(34px)}to{opacity:1;transform:none}}
+
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  .rail{scroll-behavior:auto}
+}
+
+/* wider screens: the poster gets a margin, nothing more */
+@media (min-width:600px){
+  :root{--pad:34px}
+  body{max-width:620px;margin:0 auto;border-left:1px solid var(--hair);border-right:1px solid var(--hair);min-height:100vh}
+  .hero .numeral{font-size:104px;right:26px}
+  .hero .md{font-size:58px}
+}
+</style>
+</head>
+<body>
+
+<!-- tab state: t0 = 手引, t1..t8 = 一番..八番 -->
+<input type="radio" name="d" id="t0" checked aria-label="手引 總覽">
+<input type="radio" name="d" id="t1" aria-label="一番山笠 9月19日">
+<input type="radio" name="d" id="t2" aria-label="二番山笠 9月20日">
+<input type="radio" name="d" id="t3" aria-label="三番山笠 9月21日">
+<input type="radio" name="d" id="t4" aria-label="四番山笠 9月22日">
+<input type="radio" name="d" id="t5" aria-label="五番山笠 9月23日">
+<input type="radio" name="d" id="t6" aria-label="六番山笠 9月24日">
+<input type="radio" name="d" id="t7" aria-label="七番山笠 9月25日">
+<input type="radio" name="d" id="t8" aria-label="八番山笠 9月26日">
+
+<div class="mast">
+  <span class="mark">九州馳之旅</span>
+  <span class="sub">KYUSHU 2026.09.19–26</span>
+</div>
+
+<nav class="rail">
+  <label for="t0"><span class="glyph">手引</span><span class="sm">INFO</span></label>
+  <label for="t1"><span class="glyph">一</span><span class="sm">9.19</span></label>
+  <label for="t2"><span class="glyph">二</span><span class="sm">9.20</span></label>
+  <label for="t3"><span class="glyph">三</span><span class="sm">9.21</span></label>
+  <label for="t4"><span class="glyph">四</span><span class="sm">9.22</span></label>
+  <label for="t5"><span class="glyph">五</span><span class="sm">9.23</span></label>
+  <label for="t6"><span class="glyph">六</span><span class="sm">9.24</span></label>
+  <label for="t7"><span class="glyph">七</span><span class="sm">9.25</span></label>
+  <label for="t8"><span class="glyph">八</span><span class="sm">9.26</span></label>
+</nav>
+
+<main class="panels">
+
+<!-- ══════════════ 手引 ══════════════ -->
+<section id="p0">
+  <div class="brief">
+    <div id="clock"><span>出立まで</span><b></b></div>
+
+
+    <div class="card">
+      <h2>連 休<i>シルバーウィーク · 影響前五天</i></h2>
+      <dl>
+        <div class="row"><dt>9.19 土</dt><dd>週六</dd></div>
+        <div class="row"><dt>9.20 日</dt><dd>週日</dd></div>
+        <div class="row"><dt>9.21 月</dt><dd>敬老の日<span class="todo"> · 祝日</span></dd></div>
+        <div class="row"><dt>9.22 火</dt><dd>国民の休日<span class="todo"> · 祝日</span></dd></div>
+        <div class="row"><dt>9.23 水</dt><dd>秋分の日<span class="todo"> · 祝日</span></dd></div>
+      </dl>
+      <div class="warn">
+        <b>你撞上 11 年來第一次的五連休</b>
+        9/19–9/23 全日本連假，等於你前五天都在人潮尖峰。
+        影響：景點與餐廳大排長龍、想吃的店最好先訂、鳥栖 Outlet（9/19 週六）會非常擠、
+        9/23 取車上高速可能塞車 —— 福岡→小浜温泉 我估的 2.5–3 小時要往上加。
+        <br><br>
+        反過來有兩個好處：<b>唐戸市場</b>週日祝日 08:00 就開（平日要 10:00），
+        <b>潮風号</b>只在土日祝運行 —— 9/20 兩個剛好都成立。
+        9/24 之後恢復平日，人會少很多。
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>空 路<i>航班 · 中華航空</i></h2>
+      <dl>
+        <div class="row">
+          <dt>往路 去程<br>9.19</dt>
+          <dd>
+            <a class="lja">CI110</a>
+            <p class="lzh">桃園 T2 <b>06:50</b> → 福岡 T1 國際線 <b>09:55</b><br>飛行約 2 小時 05 分</p>
+          </dd>
+        </div>
+        <div class="row">
+          <dt>復路 回程<br>9.26</dt>
+          <dd>
+            <a class="lja">CI129</a>
+            <p class="lzh">福岡 T1 國際線 <b>19:10</b> → 桃園 T2 <b>20:35</b><br>飛行約 2 小時 25 分</p>
+          </dd>
+        </div>
+      </dl>
+      <div class="warn">
+        <b>去程要留意</b>
+        機捷 A1 台北車站首班直達車約 06:00 發車，到 T2 約 06:40 —— CI110 06:50 起飛，報到已關櫃。
+        只能搭 1819 國光客運（24 小時營運，約 55–70 分）、計程車，或前一晚住機場周邊。
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>宿 泊<i>住宿 · 四泊地</i></h2>
+      <dl>
+        <div class="row">
+          <dt>9.19–9.23<br>四泊</dt>
+          <dd>
+            <a class="lja" href="https://maps.app.goo.gl/PyhaHUn1utn4BC2s5" target="_blank" rel="noopener">Hotel Mei 博多天神</a><a class="map" href="https://maps.app.goo.gl/PyhaHUn1utn4BC2s5" target="_blank" rel="noopener">地図</a>
+            <p class="lzh">福岡市中央區春吉 2-16-19<br><a class="tel" href="tel:+81927716221">092-771-6221</a> · IN 15:00 / OUT 10:00<br>天神・中洲・博多皆步行可達</p>
+          </dd>
+        </div>
+        <div class="row">
+          <dt>9.23–9.24<br>一泊</dt>
+          <dd>
+            <a class="lja" href="https://maps.app.goo.gl/NWLRK5cF2YtUmiGM7" target="_blank" rel="noopener">海辺の別邸 伊勢屋</a><a class="map" href="https://maps.app.goo.gl/NWLRK5cF2YtUmiGM7" target="_blank" rel="noopener">地図</a>
+            <p class="lzh">長崎縣雲仙市小浜町北本町 905<br><a class="tel" href="tel:+81957742121">0957-74-2121</a><br>全室可眺橘灣 · 個室露天風呂</p>
+          </dd>
+        </div>
+        <div class="row">
+          <dt>9.24–9.25<br>一泊</dt>
+          <dd>
+            <a class="lja" href="https://maps.app.goo.gl/XoWAgEE6BBQg7JM76" target="_blank" rel="noopener">ペンション金鱗湖 豊の国</a><a class="map" href="https://maps.app.goo.gl/XoWAgEE6BBQg7JM76" target="_blank" rel="noopener">地図</a>
+            <p class="lzh">大分縣由布市湯布院町川上 1561<br><a class="tel" href="tel:+81977843011">0977-84-3011</a> · IN 15:00 / OUT 10:00<br>金鱗湖畔 · 僅 8 室 · JR由布院駅步行 20 分（有接送）</p>
+          </dd>
+        </div>
+        <div class="row">
+          <dt>9.25–9.26<br>一泊</dt>
+          <dd>
+            <a class="lja" href="https://maps.app.goo.gl/hUAENiPLenEadK4w9" target="_blank" rel="noopener">SEKIYA RESORT テラス御堂原</a><a class="map" href="https://maps.app.goo.gl/hUAENiPLenEadK4w9" target="_blank" rel="noopener">地図</a>
+            <p class="lzh">大分縣別府市南立石御堂原 649<br><a class="tel" href="tel:+81977858872">0977-85-8872</a> 預約 · <a class="tel" href="tel:+81977858841">0977-85-8841</a> 洽詢<br>客室附半露天風呂 · 俯瞰別府市街</p>
+          </dd>
+        </div>
+      </dl>
+    </div>
+
+    <div class="card">
+      <h2>移 動<i>大範圍路線</i></h2>
+      <dl>
+        <div class="row"><dt>9.19–9.23</dt><dd>福岡市（春吉）<span class="todo"> · 四晚定點 · 大眾運輸</span></dd></div>
+        <div class="row"><dt>9.23</dt><dd>福岡 → 長崎・小浜温泉<span class="todo"> · 自駕 約2.5–3h</span></dd></div>
+        <div class="row"><dt>9.24</dt><dd>小浜温泉 → 大分・由布院<span class="todo"> · 自駕 約3.5h ← 最長</span></dd></div>
+        <div class="row"><dt>9.25</dt><dd>由布院 → 大分・別府<span class="todo"> · 自駕 約40–50min</span></dd></div>
+        <div class="row"><dt>9.26</dt><dd>別府 → 福岡空港<span class="todo"> · 自駕 約148km／2h</span></dd></div>
+      </dl>
+    </div>
+
+    <div class="card">
+      <h2>交 通<i>票券</i></h2>
+      <dl>
+        <div class="row"><dt>ICカード</dt><dd class="todo">SUGOCA／はやかけん／ICOCA</dd></div>
+        <div class="row"><dt>周遊券</dt><dd class="todo">JR北九州パス？地下鉄一日乗車券？</dd></div>
+      </dl>
+    </div>
+
+
+    <div class="card">
+      <h2>運 転<i>租車自駕 · 9.23–9.26</i></h2>
+      <dl>
+        <div class="row"><dt>会社</dt><dd>ORIX レンタカー</dd></div>
+        <div class="row"><dt>車両</dt><dd>SA CLASS Campaign Limited<p class="lzh">小型車 · 禁菸</p></dd></div>
+        <div class="row">
+          <dt>貸出 取車</dt>
+          <dd>
+            <a class="lja" href="https://www.google.com/maps/search/?api=1&amp;query=%E3%82%AA%E3%83%AA%E3%83%83%E3%82%AF%E3%82%B9%E3%83%AC%E3%83%B3%E3%82%BF%E3%82%AB%E3%83%BC%20%E5%8D%9A%E5%A4%9A%E9%A7%85%E5%8D%9A%E5%A4%9A%E5%8F%A3%E5%BA%97" target="_blank" rel="noopener">博多駅 博多口店</a><a class="map" href="https://www.google.com/maps/search/?api=1&amp;query=%E3%82%AA%E3%83%AA%E3%83%83%E3%82%AF%E3%82%B9%E3%83%AC%E3%83%B3%E3%82%BF%E3%82%AB%E3%83%BC%20%E5%8D%9A%E5%A4%9A%E9%A7%85%E5%8D%9A%E5%A4%9A%E5%8F%A3%E5%BA%97" target="_blank" rel="noopener">地図</a>
+            <p class="lzh">9.23（水）<b>09:30</b></p>
+          </dd>
+        </div>
+        <div class="row">
+          <dt>返却 還車</dt>
+          <dd>
+            <a class="lja" href="https://www.google.com/maps/search/?api=1&amp;query=%E7%A6%8F%E5%B2%A1%E7%9C%8C%E7%A6%8F%E5%B2%A1%E5%B8%82%E5%8D%9A%E5%A4%9A%E5%8C%BA%E5%8D%8A%E9%81%93%E6%A9%8B2-9-34%20%E3%82%AA%E3%83%AA%E3%83%83%E3%82%AF%E3%82%B9%E3%83%AC%E3%83%B3%E3%82%BF%E3%82%AB%E3%83%BC" target="_blank" rel="noopener">福岡空港 国際線ターミナル店</a><a class="map" href="https://www.google.com/maps/search/?api=1&amp;query=%E7%A6%8F%E5%B2%A1%E7%9C%8C%E7%A6%8F%E5%B2%A1%E5%B8%82%E5%8D%9A%E5%A4%9A%E5%8C%BA%E5%8D%8A%E9%81%93%E6%A9%8B2-9-34%20%E3%82%AA%E3%83%AA%E3%83%83%E3%82%AF%E3%82%B9%E3%83%AC%E3%83%B3%E3%82%BF%E3%82%AB%E3%83%BC" target="_blank" rel="noopener">地図</a>
+            <p class="lzh">9.26（土）<b>17:00</b> 期限 · 可提早還<br>福岡市博多區半道橋 2-9-34</p>
+          </dd>
+        </div>
+      </dl>
+      <a class="gas" href="https://www.google.com/maps/search/?api=1&amp;query=%E3%82%AC%E3%82%BD%E3%83%AA%E3%83%B3%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89" target="_blank" rel="noopener"><span class="gi">油</span><span class="gl">搜尋附近加油站<em>ガソリンスタンド</em></span></a>
+      <div class="warn">
+        <b>自駕要帶的</b>
+        日本監理所認可的<b>日文譯本</b>（台灣駕照＋譯本，公路總局或日本台灣交流協會辦，正本駕照也要帶）。
+        缺譯本現場租不到車。另外高速公路建議借 ETC 卡，九州道＋大分道這幾段收費站不少。<br><br>還車點<b>不在航廈裡</b> —— 在機場外的半道橋，還完車要搭 ORIX 免費接駁車回國際線航廈。導航請直接輸入半道橋地址，不要導「福岡空港」。
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>非 常<i>緊急聯絡</i></h2>
+      <dl>
+        <div class="row"><dt>警察</dt><dd><a class="tel" href="tel:110">110</a></dd></div>
+        <div class="row"><dt>救急・消防</dt><dd><a class="tel" href="tel:119">119</a></dd></div>
+        <div class="row"><dt>台北駐福岡<br>辦事處</dt><dd><a class="tel" href="tel:+81922734400">+81 92 273 4400</a><br><a class="tel" href="tel:+818035477013">+81 80 3547 7013</a> <span class="todo">急難</span></dd></div>
+      </dl>
+    </div>
+
+    <div class="card">
+      <h2>同 行<i>成員與備註</i></h2>
+      <dl>
+        <div class="row"><dt>メンバー</dt><dd>Wayne・Cindia<span class="todo"> · 二名</span></dd></div>
+      </dl>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ 一番 9.19 ══════════════ -->
+<section id="p1">
+  <div class="hero">
+    <span class="numeral">一番</span>
+    <p class="zone">博多・春吉</p>
+    <p class="md">9.19</p>
+    <p class="dow">土曜 SAT</p>
+  </div>
+  <div class="lodge">
+    <span class="lg">宿</span>
+    <div class="lb">
+      <a class="lja" href="https://maps.app.goo.gl/PyhaHUn1utn4BC2s5" target="_blank" rel="noopener">Hotel Mei 博多天神</a>
+      <p class="lzh">福岡市中央區春吉 2-16-19<br><a class="tel" href="tel:+81927716221">092-771-6221</a></p>
+    </div>
+    <a class="map" href="https://maps.app.goo.gl/PyhaHUn1utn4BC2s5" target="_blank" rel="noopener">地図</a>
+  </div>
+  <div class="track">
+    <div class="stop key" data-at="04:50">
+      <div class="t">04:50<em>逆算</em></div>
+      <div class="c">
+        <span class="ja">台湾桃園国際空港 第2ターミナル</span>
+        <p class="zh">桃園機場 T2 · 報到</p>
+        <p class="move">CI110 06:50 発 — 國際線建議提前 2 小時到</p>
+        <p class="note">機捷趕不上：A1 台北車站首班直達車約 06:00 發，到 T2 約 06:40，關櫃了。改搭 1819 國光客運（24 小時營運，約 55–70 分）或計程車。</p>
+      </div>
+    </div>
+    <div class="stop key" data-at="06:50">
+      <div class="t">06:50<em>発</em></div>
+      <div class="c">
+        <span class="ja">CI110 台北 → 福岡</span>
+        <p class="zh">中華航空 · 飛行約 2 小時 05 分</p>
+      </div>
+    </div>
+    <div class="stop" data-at="09:55">
+      <div class="t">09:55<em>着</em></div>
+      <div class="c">
+        <a class="ja" href="https://www.google.com/maps/search/?api=1&amp;query=%E7%A6%8F%E5%B2%A1%E7%A9%BA%E6%B8%AF%E5%9B%BD%E9%9A%9B%E7%B7%9A%E3%82%BF%E3%83%BC%E3%83%9F%E3%83%8A%E3%83%AB" target="_blank" rel="noopener">福岡空港 国際線ターミナル</a>
+        <p class="zh">福岡機場 國際線航廈<a class="map" href="https://www.google.com/maps/search/?api=1&amp;query=%E7%A6%8F%E5%B2%A1%E7%A9%BA%E6%B8%AF%E5%9B%BD%E9%9A%9B%E7%B7%9A%E3%82%BF%E3%83%BC%E3%83%9F%E3%83%8A%E3%83%AB" target="_blank" rel="noopener">地図</a></p>
+        <p class="move">入国審査 → 受託手荷物 → 出口</p>
+        <p class="note">出關後先辦 IC 卡（SUGOCA／はやかけん）。</p>
+      </div>
+    </div>
+    <div class="stop flow" data-at="11:00">
+      <div class="t">朝<em>荷物</em></div>
+      <div class="c">
+        <a class="ja" href="https://maps.app.goo.gl/PyhaHUn1utn4BC2s5" target="_blank" rel="noopener">Hotel Mei 博多天神</a>
+        <p class="zh">寄放行李<a class="map" href="https://maps.app.goo.gl/PyhaHUn1utn4BC2s5" target="_blank" rel="noopener">地図</a></p>
+        <p class="move">国際線 → 無料連絡バス 約10分 → 国内線 → 地下鉄空港線 天神駅 11分 → 徒歩 約10分</p>
+        <p class="note">國際線航廈沒有地下鐵，一定要先搭免費接駁到國內線。IN 是 15:00，這時候只能寄行李，正式 check-in 晚上回來再辦。</p>
+      </div>
+    </div>
+    <div class="stop flow" data-at="12:30">
+      <div class="t">昼<em>昼食</em></div>
+      <div class="c">
+        <a class="ja" href="https://maps.app.goo.gl/QNFRznmSytqydok5A" target="_blank" rel="noopener">元祖博多めんたい重 西中洲</a>
+        <p class="zh">明太子重<a class="map" href="https://maps.app.goo.gl/QNFRznmSytqydok5A" target="_blank" rel="noopener">地図</a></p>
+        <p class="move">Hotel Mei 徒歩圏内 — 春吉と西中洲は那珂川をはさんで隣</p>
+        <p class="note">從飯店走過去就到，不用搭車。人氣店，可能要排。</p>
+      </div>
+    </div>
+    <div class="stop flow" data-at="14:30">
+      <div class="t">午後<em>買物</em></div>
+      <div class="c">
+        <a class="ja" href="https://maps.app.goo.gl/ZAVyA2AGNodxnkDh6" target="_blank" rel="noopener">鳥栖プレミアム・アウトレット</a>
+        <p class="zh">鳥栖 Premium Outlets · 佐賀縣<a class="map" href="https://maps.app.goo.gl/ZAVyA2AGNodxnkDh6" target="_blank" rel="noopener">地図</a></p>
+        <p class="move">JR鹿児島本線 特急 博多 → 鳥栖 約20分 → 路線バス 約15分</p>
+        <p class="note">走 JR，不要搭天神直達高速巴士 —— 那條週末只有 2 往復，會把你綁死在班次上。JR 特急班次密集，隨時走隨時到。單程約 40 分，來回抓 1.5 小時車程。</p>
+      </div>
+    </div>
+    <div class="stop flow" data-at="18:30">
+      <div class="t">夜<em>夕食</em></div>
+      <div class="c">
+        <a class="ja" href="https://maps.app.goo.gl/LaLdifMjfqQ6oJnX9" target="_blank" rel="noopener">天神 屋台</a>
+        <p class="zh">到現場再挑<a class="map" href="https://maps.app.goo.gl/LaLdifMjfqQ6oJnX9" target="_blank" rel="noopener">地図</a></p>
+        <p class="move">天神から Hotel Mei まで徒歩 約10分</p>
+        <p class="note">屋台約 18:00 後陸續開，多為現金。回飯店走得到，不用擔心末班車。今天 3 點多就起床了，累就早點收。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ 二番 9.20 ══════════════ -->
+<section id="p2">
+  <div class="hero">
+    <span class="numeral">二番</span>
+    <p class="zone">下関・門司港・小倉</p>
+    <p class="md">9.20</p>
+    <p class="dow">日曜 SUN</p>
+  </div>
+  <div class="lodge">
+    <span class="lg">宿</span>
+    <div class="lb">
+      <a class="lja" href="https://maps.app.goo.gl/PyhaHUn1utn4BC2s5" target="_blank" rel="noopener">Hotel Mei 博多天神</a>
+      <p class="lzh">福岡市中央區春吉 2-16-19<br><a class="tel" href="tel:+81927716221">092-771-6221</a></p>
+    </div>
+    <a class="map" href="https://maps.app.goo.gl/PyhaHUn1utn4BC2s5" target="_blank" rel="noopener">地図</a>
+  </div>
+  <div class="track">
+    <div class="stop flow" data-at="07:45">
+      <div class="t">朝<em>出発</em></div>
+      <div class="c">
+        <span class="ja">渡辺通 → 門司港 → 唐戸</span>
+        <p class="zh">福岡 → 下関 · 約 1 小時 20 分</p>
+        <p class="move">七隈線 渡辺通→博多 6分 · 新幹線 博多→小倉 16分 · JR鹿児島本線 小倉→門司港 13分 · 関門汽船 門司港→唐戸 5分</p>
+        <p class="note">走新幹線。JR 在來線快速要 1 小時 25 分，多花 40 分鐘。唐戸市場賣完就收，早到有差。</p>
+      </div>
+    </div>
+    <div class="stop flow" data-at="09:00">
+      <div class="t">朝<em>朝食</em></div>
+      <div class="c">
+        <a class="ja" href="https://maps.app.goo.gl/2pxvqEMeeUa5z5U7A" target="_blank" rel="noopener">唐戸市場 活きいき馬関街</a>
+        <p class="zh">海鮮早餐 · 河豚、壽司<a class="map" href="https://maps.app.goo.gl/2pxvqEMeeUa5z5U7A" target="_blank" rel="noopener">地図</a></p>
+        <p class="move">日曜・祝日 08:00–15:00（平日與週五六是 10:00 開）</p>
+        <p class="note">9/20 是週日，8 點就開。攤位賣完提前收攤，這是今天唯一「越早越好」的一站。</p>
+      </div>
+    </div>
+    <div class="stop flow" data-at="10:30">
+      <div class="t">午前<em>見学</em></div>
+      <div class="c">
+        <a class="ja" href="https://maps.app.goo.gl/KAmn7chdzy1HkFW86" target="_blank" rel="noopener">日清講和記念館</a>
+        <p class="zh">馬關條約簽署地 · 春帆樓旁<a class="map" href="https://maps.app.goo.gl/KAmn7chdzy1HkFW86" target="_blank" rel="noopener">地図</a></p>
+        <p class="move">唐戸市場 徒歩 約5分</p>
+        <p class="note">免費入館。展示當年談判的原桌椅復原。</p>
+      </div>
+    </div>
+    <div class="stop flow" data-at="11:15">
+      <div class="t">午前<em>参拝</em></div>
+      <div class="c">
+        <a class="ja" href="https://maps.app.goo.gl/B8vezkNpZ6DLMNry8" target="_blank" rel="noopener">赤間神宮</a>
+        <p class="zh">祀奉安德天皇 · 水天門很好拍<a class="map" href="https://maps.app.goo.gl/B8vezkNpZ6DLMNry8" target="_blank" rel="noopener">地図</a></p>
+        <p class="move">日清講和記念館 徒歩 約3分</p>
+        <p class="note">就在紀念館隔壁，兩站可以一起走完。</p>
+      </div>
+    </div>
+    <div class="stop flow" data-at="12:00">
+      <div class="t">昼<em>徒歩</em></div>
+      <div class="c">
+        <a class="ja" href="https://www.google.com/maps/search/?api=1&amp;query=%E9%96%A2%E9%96%80%E3%83%88%E3%83%B3%E3%83%8D%E3%83%AB%E4%BA%BA%E9%81%93%20%E4%B8%8B%E9%96%A2%E5%81%B4%20%E5%BE%A1%E8%A3%B3%E5%B7%9D" target="_blank" rel="noopener">関門トンネル人道</a>
+        <p class="zh">走海底回九州 · 780m<a class="map" href="https://www.google.com/maps/search/?api=1&amp;query=%E9%96%A2%E9%96%80%E3%83%88%E3%83%B3%E3%83%8D%E3%83%AB%E4%BA%BA%E9%81%93%20%E4%B8%8B%E9%96%A2%E5%81%B4%20%E5%BE%A1%E8%A3%B3%E5%B7%9D" target="_blank" rel="noopener">地図</a></p>
+        <p class="move">赤間神宮 → 御裳川（下関側入口）徒歩 約18分 ／ サンデン交通バス 約5分 · 隧道内 徒歩 約15分</p>
+        <p class="note">06:00–22:00，行人免費（自行車 ¥20）。下到地下約 55m 有電梯。中間地上有県境線，可以拍照。</p>
+      </div>
+    </div>
+    <div class="stop flow" data-at="12:45">
+      <div class="t">昼<em>列車</em></div>
+      <div class="c">
+        <a class="ja" href="https://www.google.com/maps/search/?api=1&amp;query=%E9%96%A2%E9%96%80%E6%B5%B7%E5%B3%A1%E3%82%81%E3%81%8B%E3%82%8A%E9%A7%85" target="_blank" rel="noopener">潮風号 関門海峡めかり → 門司港</a>
+        <p class="zh">北九州銀行レトロライン · 約10分<a class="map" href="https://www.google.com/maps/search/?api=1&amp;query=%E9%96%A2%E9%96%80%E6%B5%B7%E5%B3%A1%E3%82%81%E3%81%8B%E3%82%8A%E9%A7%85" target="_blank" rel="noopener">地図</a></p>
+        <p class="move">隧道門司側出口（和布刈）→ 関門海峡めかり駅 徒歩 約5分 · 終点 九州鉄道記念館駅</p>
+        <p class="note">土日祝運行 —— 9/20 是週日，有跑。時刻表官網或電話 093-331-1065 確認，班距較疏。</p>
+      </div>
+    </div>
+    <div class="stop flow" data-at="13:15">
+      <div class="t">昼<em>昼食</em></div>
+      <div class="c">
+        <a class="ja" href="https://maps.app.goo.gl/7odaRbvWexyw51vz8" target="_blank" rel="noopener">BEAR FRUITS 本店</a>
+        <p class="zh">焼きカレー · 門司港名物<a class="map" href="https://maps.app.goo.gl/7odaRbvWexyw51vz8" target="_blank" rel="noopener">地図</a></p>
+        <p class="move">九州鉄道記念館駅 徒歩 約5分 · 門司港駅すぐ</p>
+        <p class="note">門司港焗烤咖哩的名店，連假中午會排隊。</p>
+      </div>
+    </div>
+    <div class="stop flow" data-at="14:30">
+      <div class="t">午後<em>散策</em></div>
+      <div class="c">
+        <a class="ja" href="https://maps.app.goo.gl/ZaUnNne4QJS8GiFi8" target="_blank" rel="noopener">門司港レトロ 海峡プラザ</a>
+        <p class="zh">海邊商場 · 伴手禮<a class="map" href="https://maps.app.goo.gl/ZaUnNne4QJS8GiFi8" target="_blank" rel="noopener">地図</a></p>
+        <p class="move">BEAR FRUITS 徒歩 約3分</p>
+        <p class="note">跟門司港駅、藍翼橋都在同一區，走走看看就好。</p>
+      </div>
+    </div>
+    <div class="stop flow" data-at="16:00">
+      <div class="t">午後<em>買物</em></div>
+      <div class="c">
+        <a class="ja" href="https://maps.app.goo.gl/VPTDBy4je3y1Fpcu6" target="_blank" rel="noopener">あるあるCity</a>
+        <p class="zh">動漫大樓 · 小倉<a class="map" href="https://maps.app.goo.gl/VPTDBy4je3y1Fpcu6" target="_blank" rel="noopener">地図</a></p>
+        <p class="move">JR鹿児島本線 門司港 → 小倉 約13分 · 小倉駅新幹線口 徒歩1分</p>
+      </div>
+    </div>
+    <div class="stop flow" data-at="17:30">
+      <div class="t">夕<em>買物</em></div>
+      <div class="c">
+        <a class="ja" href="https://maps.app.goo.gl/nxBg5r8nEyaMpnBE9" target="_blank" rel="noopener">シロヤ 小倉店</a>
+        <p class="zh">奶油小蛋糕 オムレット · サニーパン<a class="map" href="https://maps.app.goo.gl/nxBg5r8nEyaMpnBE9" target="_blank" rel="noopener">地図</a></p>
+        <p class="move">小倉駅 徒歩 約3分</p>
+        <p class="note">便宜好吃，賣完就沒。晚餐前先買好，別等吃完。</p>
+      </div>
+    </div>
+    <div class="stop key" data-at="19:30">
+      <div class="t">19:30<em>予約</em></div>
+      <div class="c">
+        <a class="ja" href="https://maps.app.goo.gl/1DPv9a1JDsm5KSdcA" target="_blank" rel="noopener">博多もつ鍋 前田屋 小倉店</a>
+        <p class="zh">內臟鍋 · <b>已預約</b><a class="map" href="https://maps.app.goo.gl/1DPv9a1JDsm5KSdcA" target="_blank" rel="noopener">地図</a></p>
+        <p class="move">小倉駅周辺</p>
+        <p class="note">今天唯一綁死的時間。連假期間別遲到，位子不會等。</p>
+      </div>
+    </div>
+    <div class="stop flow" data-at="21:15">
+      <div class="t">夜<em>帰路</em></div>
+      <div class="c">
+        <span class="ja">小倉 → Hotel Mei</span>
+        <p class="zh">回春吉 · 約 30 分</p>
+        <p class="move">新幹線 小倉→博多 16分 · 七隈線 博多→渡辺通 6分 · 徒歩</p>
+        <p class="note">新幹線末班很晚，不用趕。走在來線要 1 小時 20 分，這時間別走。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ 三番 9.21 ══════════════ -->
+<section id="p3">
+  <div class="hero">
+    <span class="numeral">三番</span>
+    <p class="zone">福岡市内</p>
+    <p class="md">9.21</p>
+    <p class="dow">月曜 MON</p>
+  </div>
+  <div class="lodge">
+    <span class="lg">宿</span>
+    <div class="lb">
+      <a class="lja" href="https://maps.app.goo.gl/PyhaHUn1utn4BC2s5" target="_blank" rel="noopener">Hotel Mei 博多天神</a>
+      <p class="lzh">福岡市中央區春吉 2-16-19<br><a class="tel" href="tel:+81927716221">092-771-6221</a></p>
+    </div>
+    <a class="map" href="https://maps.app.goo.gl/PyhaHUn1utn4BC2s5" target="_blank" rel="noopener">地図</a>
+  </div>
+  <div class="track"><div class="blank"><p>行程未定</p><small>把時間、地點、交通、備註給我，我填進來。</small></div></div>
+</section>
+
+<!-- ══════════════ 四番 9.22 ══════════════ -->
+<section id="p4">
+  <div class="hero">
+    <span class="numeral">四番</span>
+    <p class="zone">福岡市内</p>
+    <p class="md">9.22</p>
+    <p class="dow">火曜 TUE</p>
+  </div>
+  <div class="lodge">
+    <span class="lg">宿</span>
+    <div class="lb">
+      <a class="lja" href="https://maps.app.goo.gl/PyhaHUn1utn4BC2s5" target="_blank" rel="noopener">Hotel Mei 博多天神</a>
+      <p class="lzh">福岡市中央區春吉 2-16-19<br><a class="tel" href="tel:+81927716221">092-771-6221</a></p>
+    </div>
+    <a class="map" href="https://maps.app.goo.gl/PyhaHUn1utn4BC2s5" target="_blank" rel="noopener">地図</a>
+  </div>
+  <div class="track"><div class="blank"><p>行程未定</p><small>把時間、地點、交通、備註給我，我填進來。</small></div></div>
+</section>
+
+<!-- ══════════════ 五番 9.23 ══════════════ -->
+<section id="p5">
+  <div class="hero">
+    <span class="numeral">五番</span>
+    <p class="zone">佐賀太良・小浜温泉</p>
+    <p class="md">9.23</p>
+    <p class="dow">水曜 WED</p>
+  </div>
+  <div class="lodge">
+    <span class="lg">宿</span>
+    <div class="lb">
+      <a class="lja" href="https://maps.app.goo.gl/NWLRK5cF2YtUmiGM7" target="_blank" rel="noopener">海辺の別邸 伊勢屋</a>
+      <p class="lzh">長崎縣雲仙市小浜町北本町 905<br><a class="tel" href="tel:+81957742121">0957-74-2121</a></p>
+    </div>
+    <a class="map" href="https://maps.app.goo.gl/NWLRK5cF2YtUmiGM7" target="_blank" rel="noopener">地図</a>
+  </div>
+  <div class="track">
+    <div class="stop flow" data-at="08:00">
+      <div class="t">朝<em>朝食</em></div>
+      <div class="c">
+        <span class="ja">朝食</span>
+        <p class="zh">春吉・天神周辺<span class="todo"> · 店未定</span></p>
+        <p class="note">要在 09:00 前吃完退房。附近店給我我補進來。</p>
+      </div>
+    </div>
+    <div class="stop key" data-at="09:00">
+      <div class="t">09:00<em>逆算</em></div>
+      <div class="c">
+        <a class="ja" href="https://maps.app.goo.gl/PyhaHUn1utn4BC2s5" target="_blank" rel="noopener">Hotel Mei 博多天神</a>
+        <p class="zh">退房 · 四晚結束<a class="map" href="https://maps.app.goo.gl/PyhaHUn1utn4BC2s5" target="_blank" rel="noopener">地図</a></p>
+        <p class="move">春吉 → 博多駅博多口 · タクシー 約10分 ／ 地下鉄 天神→博多 5分＋徒歩</p>
+        <p class="note">飯店 OUT 是 10:00，但取車 09:30，所以要提早退。行李直接上車，之後四天都在車上。</p>
+      </div>
+    </div>
+    <div class="stop key" data-at="09:30">
+      <div class="t">09:30<em>貸出</em></div>
+      <div class="c">
+        <a class="ja" href="https://www.google.com/maps/search/?api=1&amp;query=%E3%82%AA%E3%83%AA%E3%83%83%E3%82%AF%E3%82%B9%E3%83%AC%E3%83%B3%E3%82%BF%E3%82%AB%E3%83%BC%20%E5%8D%9A%E5%A4%9A%E9%A7%85%E5%8D%9A%E5%A4%9A%E5%8F%A3%E5%BA%97" target="_blank" rel="noopener">ORIX レンタカー 博多駅博多口店</a>
+        <p class="zh">取車 · SA CLASS 小型車<a class="map" href="https://www.google.com/maps/search/?api=1&amp;query=%E3%82%AA%E3%83%AA%E3%83%83%E3%82%AF%E3%82%B9%E3%83%AC%E3%83%B3%E3%82%BF%E3%82%AB%E3%83%BC%20%E5%8D%9A%E5%A4%9A%E9%A7%85%E5%8D%9A%E5%A4%9A%E5%8F%A3%E5%BA%97" target="_blank" rel="noopener">地図</a></p>
+        <p class="move">要帶：台灣駕照正本＋日文譯本＋護照＋信用卡</p>
+        <p class="note">建議借 ETC 卡，接下來四天九州道＋長崎道＋大分道收費站很多。順便確認油種與滿油返還規定。</p>
+      </div>
+    </div>
+    <div class="rest">
+      <span class="rb"><i>休</i></span>
+      <div class="rl">
+        <a href="https://maps.app.goo.gl/7Apciax1Mu8Qte4j8" target="_blank" rel="noopener">基山PA（下り）<em>トイレ</em></a>
+        <a href="https://maps.app.goo.gl/6mMq553CNteGgWe59" target="_blank" rel="noopener">道の駅 鹿島<em>売店・食事</em></a>
+      </div>
+    </div>
+    <div class="stop flow" data-at="12:00">
+      <div class="t">昼<em>昼食</em></div>
+      <div class="c">
+        <a class="ja" href="https://maps.app.goo.gl/pAzTSngmtLTpbN9u8" target="_blank" rel="noopener">大福丸 箱崎店</a>
+        <p class="zh">佐賀縣太良 · 有明海沿岸<a class="map" href="https://maps.app.goo.gl/pAzTSngmtLTpbN9u8" target="_blank" rel="noopener">地図</a></p>
+        <p class="move">九州道 → 鳥栖JCT → 長崎道 → 武雄北方IC → 国道207号 · 約100km／1小時30分（目安）</p>
+        <p class="note">注意：這個「箱崎」是佐賀太良的箱崎，不是福岡的箱崎 —— 已經在有明海邊了，離海中鳥居只 2.5km。今天是秋分の日，連假最後一天，出福岡的高速可能塞，抓寬一點。</p>
+      </div>
+    </div>
+    <div class="rest">
+      <span class="rb"><i>休</i></span>
+      <div class="rl">
+        <a href="https://maps.app.goo.gl/zH14nXUkx1QwLF8o9" target="_blank" rel="noopener">道の駅 太良<em>売店・食事</em></a>
+      </div>
+    </div>
+    <div class="stop flow" data-at="13:30">
+      <div class="t">午後<em>参拝</em></div>
+      <div class="c">
+        <a class="ja" href="https://maps.app.goo.gl/mmKoQxiamTbtTdLd7" target="_blank" rel="noopener">大魚神社 海中鳥居</a>
+        <p class="zh">三座鳥居 · 離岸約 200m<a class="map" href="https://maps.app.goo.gl/mmKoQxiamTbtTdLd7" target="_blank" rel="noopener">地図</a></p>
+        <p class="move">大福丸 車程 約5分</p>
+        <p class="note">有明海干滿差最大 6m，這裡的景完全看潮位：<b>滿潮</b>鳥居像浮在海上，<b>干潮</b>海中道路的石板路露出來、可以走到鳥居底下穿過去。出發前先查 → <a href="https://www.umitenki.jp/tenki/7199/tide" target="_blank" rel="noopener">海天気 潮見表</a>。兩種都好看，但要先知道會遇到哪一種。</p>
+      </div>
+    </div>
+    <div class="rest">
+      <span class="rb"><i>休</i></span>
+      <div class="rl">
+        <a href="https://maps.app.goo.gl/yDpU2ZGxYDQfEodYA" target="_blank" rel="noopener">雲仙多良シーライン 展望トイレ<em>トイレ・展望</em></a>
+      </div>
+    </div>
+    <div class="stop flow" data-at="15:30">
+      <div class="t">午後<em>休憩</em></div>
+      <div class="c">
+        <a class="ja" href="https://maps.app.goo.gl/xCK62evFXd9LYXEa6" target="_blank" rel="noopener">＆coffee アンドコーヒー</a>
+        <p class="zh">雲仙市千々石町丙 2138-1 · 雲仙スクエア内<a class="map" href="https://maps.app.goo.gl/xCK62evFXd9LYXEa6" target="_blank" rel="noopener">地図</a></p>
+        <p class="move">国道207号 → 諫早 → 国道57号 · 約44km／約55分（目安）· 10:00–18:00</p>
+        <p class="note"><b>要先打電話。9/23 是星期三 = 這家的定休日。</b>那天是秋分の日，祝日可能照開，但沒確認就跑過去有機會吃閉門羹 → <a class="tel" href="tel:+81957515000">0957-51-5000</a>。<br>若沒開就直接進小浜（只剩 11km），那邊有足湯和店家。附帶：這家是 1912 年創業的和菓子店開的，在農產直賣所裡，可以順便買點東西。</p>
+      </div>
+    </div>
+    <div class="stop flow" data-at="17:00">
+      <div class="t">夕<em>宿</em></div>
+      <div class="c">
+        <a class="ja" href="https://maps.app.goo.gl/NWLRK5cF2YtUmiGM7" target="_blank" rel="noopener">海辺の別邸 伊勢屋</a>
+        <p class="zh">小浜温泉 · 入住<a class="map" href="https://maps.app.goo.gl/NWLRK5cF2YtUmiGM7" target="_blank" rel="noopener">地図</a></p>
+        <p class="move">＆coffee から 国道57号 · 約11km／約20分 · 停車用市營停車場（旅館徒步1分）</p>
+        <p class="note">IN 時間未確認，跟旅館確認一下。房間看得到橘灣，這一帶的日落很有名，早點到比較值得。</p>
+      </div>
+    </div>
+    <div class="stop flow" data-at="18:00">
+      <div class="t">夕<em>散策</em></div>
+      <div class="c">
+        <a class="ja" href="https://www.google.com/maps/search/?api=1&amp;query=%E3%81%BB%E3%81%A3%E3%81%A8%E3%81%B5%E3%81%A3%E3%81%A8105%20%E5%B0%8F%E6%B5%9C%E6%B8%A9%E6%B3%89" target="_blank" rel="noopener">小浜温泉 周辺</a>
+        <p class="zh">日本最長足湯 ほっとふっと105<a class="map" href="https://www.google.com/maps/search/?api=1&amp;query=%E3%81%BB%E3%81%A3%E3%81%A8%E3%81%B5%E3%81%A3%E3%81%A8105%20%E5%B0%8F%E6%B5%9C%E6%B8%A9%E6%B3%89" target="_blank" rel="noopener">地図</a></p>
+        <p class="move">伊勢屋 徒歩圏内</p>
+        <p class="note">105m 長的足湯，就在海邊，可以邊泡邊看夕陽。另外小浜的溫泉蒸氣噴出口沿路都有。</p>
+      </div>
+    </div>
+    <div class="stop flow" data-at="19:00">
+      <div class="t">夜<em>夕食</em></div>
+      <div class="c">
+        <a class="ja" href="https://maps.app.goo.gl/H9yyvvWwePLf3BNq8" target="_blank" rel="noopener">海鮮市場 蒸釜屋</a>
+        <p class="zh">溫泉蒸氣蒸海鮮<a class="map" href="https://maps.app.goo.gl/H9yyvvWwePLf3BNq8" target="_blank" rel="noopener">地図</a></p>
+        <p class="move">伊勢屋 徒歩 約6分（450m）</p>
+        <p class="note">用小浜温泉的蒸氣現蒸海鮮。走得到，不用開車 —— 今天開了快 3 小時，晚上可以喝一點。</p>
+      </div>
+    </div>
+    <div class="stop flow" data-at="21:00">
+      <div class="t">夜<em>帰宿</em></div>
+      <div class="c">
+        <a class="ja" href="https://maps.app.goo.gl/NWLRK5cF2YtUmiGM7" target="_blank" rel="noopener">海辺の別邸 伊勢屋</a>
+        <p class="zh">回房 · 個室露天風呂<a class="map" href="https://maps.app.goo.gl/NWLRK5cF2YtUmiGM7" target="_blank" rel="noopener">地図</a></p>
+        <p class="move">蒸釜屋 徒歩 約6分</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ 六番 9.24 ══════════════ -->
+<section id="p6">
+  <div class="hero">
+    <span class="numeral">六番</span>
+    <p class="zone">雲仙・島原・九重</p>
+    <p class="md">9.24</p>
+    <p class="dow">木曜 THU</p>
+  </div>
+  <div class="lodge">
+    <span class="lg">宿</span>
+    <div class="lb">
+      <a class="lja" href="https://maps.app.goo.gl/XoWAgEE6BBQg7JM76" target="_blank" rel="noopener">ペンション金鱗湖 豊の国</a>
+      <p class="lzh">大分縣由布市湯布院町川上 1561<br><a class="tel" href="tel:+81977843011">0977-84-3011</a></p>
+    </div>
+    <a class="map" href="https://maps.app.goo.gl/XoWAgEE6BBQg7JM76" target="_blank" rel="noopener">地図</a>
+  </div>
+  <div class="track">
+    <div class="stop flow" data-at="08:00">
+      <div class="t">朝<em>朝食</em></div>
+      <div class="c">
+        <a class="ja" href="https://maps.app.goo.gl/3NURHiiCZKiVsR3A9" target="_blank" rel="noopener">溫泉麵包・蘋果派 Pack</a>
+        <p class="zh">小浜温泉 · 溫泉蒸氣麵包<a class="map" href="https://maps.app.goo.gl/3NURHiiCZKiVsR3A9" target="_blank" rel="noopener">地図</a></p>
+        <p class="move">伊勢屋 徒歩 約6分（450m）</p>
+        <p class="note">走得到，車先不用動。今天是全程最長的一天，早點出發差很多。</p>
+      </div>
+    </div>
+    <div class="stop flow" data-at="09:15">
+      <div class="t">午前<em>散策</em></div>
+      <div class="c">
+        <a class="ja" href="https://maps.app.goo.gl/WUqY5FudMAQA54ce8" target="_blank" rel="noopener">雲仙地獄</a>
+        <p class="zh">硫氣噴出地帶 · 步道約 1 小時<a class="map" href="https://maps.app.goo.gl/WUqY5FudMAQA54ce8" target="_blank" rel="noopener">地図</a></p>
+        <p class="move">伊勢屋 退房 → 国道57号 雲仙方面 · 約11km／25分（山路）</p>
+        <p class="note">從小浜一路爬上山。步道走完一圈約 1 小時，想省時間可以只走短環線。</p>
+      </div>
+    </div>
+    <div class="stop flow" data-at="11:15">
+      <div class="t">昼<em>昼食</em></div>
+      <div class="c">
+        <a class="ja" href="https://maps.app.goo.gl/y3t1kUeryiMbzY1j9" target="_blank" rel="noopener">姫松屋 本店</a>
+        <p class="zh">島原名物 具雑煮 · 島原城旁<a class="map" href="https://maps.app.goo.gl/y3t1kUeryiMbzY1j9" target="_blank" rel="noopener">地図</a></p>
+        <p class="move">雲仙 → 島原 · 約17km／30分</p>
+        <p class="note">島原の乱で生まれた郷土料理。人氣店，連假剛過的平日應該還好。</p>
+      </div>
+    </div>
+    <div class="stop flow" data-at="12:30">
+      <div class="t">昼<em>寄道</em></div>
+      <div class="c">
+        <a class="ja" href="https://maps.app.goo.gl/kGPmrbYtkBrG7RZh7" target="_blank" rel="noopener">大三東駅</a>
+        <p class="zh">島原鉄道 · 日本最靠海的車站之一<a class="map" href="https://maps.app.goo.gl/kGPmrbYtkBrG7RZh7" target="_blank" rel="noopener">地図</a></p>
+        <p class="move">姫松屋 → 約7km／15分</p>
+        <p class="note">月台外就是有明海，滿潮時像浮在海上。黃手帕是名物。停留 20 分就夠，別戀戀不捨 —— 下一班船在等。</p>
+      </div>
+    </div>
+    <div class="stop key" data-at="13:05">
+      <div class="t">13:05<em>乗船</em></div>
+      <div class="c">
+        <a class="ja" href="https://maps.app.goo.gl/KatLx4rWoAFXAJYT6" target="_blank" rel="noopener">多比良港 有明フェリー</a>
+        <p class="zh">多比良 → 長洲 · 航程 45 分<a class="map" href="https://maps.app.goo.gl/KatLx4rWoAFXAJYT6" target="_blank" rel="noopener">地図</a></p>
+        <p class="move">大三東駅 → 約7km／15分 · 多比良発 …12:00／<b>13:05</b>／13:55／14:35／15:15…</p>
+        <p class="note"><b>建議搭 13:05，不要拖到 13:55。</b>下面那格解釋為什麼。乗用車可上網預約（當日與始發班不受理）· 多比良港 <a class="tel" href="tel:+81957782100">0957-78-2100</a>。車輛要提前約 20 分到港排隊。</p>
+      </div>
+    </div>
+    <div class="stop flow" data-at="13:50">
+      <div class="t">午後<em>上陸</em></div>
+      <div class="c">
+        <a class="ja" href="https://maps.app.goo.gl/JSF9rhaE2ZybBoHh7" target="_blank" rel="noopener">長洲港</a>
+        <p class="zh">熊本縣長洲町 · 開始長程<a class="map" href="https://maps.app.goo.gl/JSF9rhaE2ZybBoHh7" target="_blank" rel="noopener">地図</a></p>
+        <p class="move">到九重夢大吊橋 約110–130km／約2小時30分（目安）</p>
+        <p class="note">上岸後就是今天最長的一段。中途找個休息站喘一下，但別待太久。</p>
+      </div>
+    </div>
+    <div class="rest">
+      <span class="rb"><i>休</i></span>
+      <div class="rl">
+        <a href="https://maps.app.goo.gl/P9PjGh4bxpvncigp8" target="_blank" rel="noopener">広川SA（上り）<em>売店・食事</em></a>
+        <a href="https://maps.app.goo.gl/xBviMvGBjPdAY75t8" target="_blank" rel="noopener">山田SA（下り）<em>売店・食事</em></a>
+        <a href="https://maps.app.goo.gl/ppo5ovoLbNcQEmH38" target="_blank" rel="noopener">道の駅 童話の里・くす<em>売店・食事</em></a>
+      </div>
+    </div>
+    <div class="stop key" data-at="16:20">
+      <div class="t">16:20<em>逆算</em></div>
+      <div class="c">
+        <a class="ja" href="https://maps.app.goo.gl/SxWBKkunVNMcx2JVA" target="_blank" rel="noopener">九重“夢”大吊橋</a>
+        <p class="zh">日本最高步行專用吊橋 · 大分縣九重町<a class="map" href="https://maps.app.goo.gl/SxWBKkunVNMcx2JVA" target="_blank" rel="noopener">地図</a></p>
+        <p class="move">9月 08:30–18:00 · <b>入場券販売は 17:30 まで</b> · ¥500／人 · 停車免費（中村側 229 台）</p>
+        <p class="note"><b>17:30 買不到票就進不去了。</b>搭 13:05 的船 → 約 16:20 到，有 70 分鐘餘裕。搭 13:55 → 約 17:10 到，只剩 20 分鐘，午餐多聊一下或路上小塞就沒了。真的來不及也不用硬衝 —— 吊橋離由布院只有 30km，<b>9/25 早上補過來完全來得及</b>（那天只有由布院→別府 40 分鐘，最閒）。</p>
+      </div>
+    </div>
+    <div class="rest">
+      <span class="rb"><i>休</i></span>
+      <div class="rl">
+        <a href="https://maps.app.goo.gl/bB2hKnq7LDvjsy8A8" target="_blank" rel="noopener">道の駅 ゆふいん<em>売店・食事</em></a>
+      </div>
+    </div>
+    <div class="stop flow" data-at="18:15">
+      <div class="t">夕<em>宿</em></div>
+      <div class="c">
+        <a class="ja" href="https://maps.app.goo.gl/XoWAgEE6BBQg7JM76" target="_blank" rel="noopener">ペンション金鱗湖 豊の国</a>
+        <p class="zh">由布院 · 入住<a class="map" href="https://maps.app.goo.gl/XoWAgEE6BBQg7JM76" target="_blank" rel="noopener">地図</a></p>
+        <p class="move">吊橋 → 由布院 · 約30km／約40分</p>
+        <p class="note">僅 8 室的小旅宿，IN 15:00／OUT 10:00。到得晚的話先打電話說一聲比較好。</p>
+      </div>
+    </div>
+    <div class="stop flow" data-at="19:00">
+      <div class="t">夜<em>夕食</em></div>
+      <div class="c">
+        <span class="ja">夕食</span>
+        <p class="zh">由布院<span class="todo"> · 店未定</span></p>
+        <p class="note">豊の国 自己有餐廳「洋灯舎」，要吃得先預約。若要外食注意由布院晚上收得早，很多店 20:00–21:00 就關 —— 這天到得晚，先訂比較保險。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ 七番 9.25 ══════════════ -->
+<section id="p7">
+  <div class="hero">
+    <span class="numeral">七番</span>
+    <p class="zone">由布院・鶴見岳・別府</p>
+    <p class="md">9.25</p>
+    <p class="dow">金曜 FRI</p>
+  </div>
+  <div class="lodge">
+    <span class="lg">宿</span>
+    <div class="lb">
+      <a class="lja" href="https://maps.app.goo.gl/hUAENiPLenEadK4w9" target="_blank" rel="noopener">SEKIYA RESORT テラス御堂原</a>
+      <p class="lzh">大分縣別府市南立石御堂原 649<br><a class="tel" href="tel:+81977858872">0977-85-8872</a></p>
+    </div>
+    <a class="map" href="https://maps.app.goo.gl/hUAENiPLenEadK4w9" target="_blank" rel="noopener">地図</a>
+  </div>
+  <div class="track">
+    <div class="stop flow" data-at="08:00">
+      <div class="t">朝<em>朝食</em></div>
+      <div class="c">
+        <a class="ja" href="https://maps.app.goo.gl/XoWAgEE6BBQg7JM76" target="_blank" rel="noopener">朝食</a>
+        <p class="zh">ペンション豊の国<span class="todo"> · 未確認</span><a class="map" href="https://maps.app.goo.gl/XoWAgEE6BBQg7JM76" target="_blank" rel="noopener">地図</a></p>
+        <p class="note">豊の国 有自己的餐廳「洋灯舎」，先確認你訂的方案有沒有含早餐，有的話就不用另外找。</p>
+      </div>
+    </div>
+    <div class="stop flow" data-at="09:00">
+      <div class="t">朝<em>散策</em></div>
+      <div class="c">
+        <a class="ja" href="https://maps.app.goo.gl/Rui8ZE9oKM4kfUQp8" target="_blank" rel="noopener">湯の坪街道</a>
+        <p class="zh">主要商店街 · 金鱗湖周邊<a class="map" href="https://maps.app.goo.gl/Rui8ZE9oKM4kfUQp8" target="_blank" rel="noopener">地図</a></p>
+        <p class="move">豊の国 徒歩 約15分（1.3km）</p>
+        <p class="note"><b>車留在旅宿，早上全程走路。</b>豊の国、湯の坪街道、午餐的「心」三個點全在 1.3km 內 —— 由布院白天很堵、停車位難找，走路反而快。<br><br>另外：如果 9/24 沒趕上<b>九重夢大吊橋</b>，今天早上就是補的時機（單程 30km／40 分，來回加走橋約 2 小時）。代價是放掉湯の坪街道。</p>
+      </div>
+    </div>
+    <div class="stop " data-at="10:15">
+      <div class="t">10:15<em>開店前</em></div>
+      <div class="c">
+        <a class="ja" href="https://maps.app.goo.gl/LXzLe9d5pXwzXn9g8" target="_blank" rel="noopener">由布まぶし 心 金鱗湖本店</a>
+        <p class="zh">由布釜飯 · 湯布院町川上 1492-1<a class="map" href="https://maps.app.goo.gl/LXzLe9d5pXwzXn9g8" target="_blank" rel="noopener">地図</a></p>
+        <p class="move">10:30 開店（LO 17:30）· 定休 火曜 → 9/25 是週五，有開 · <a class="tel" href="tel:+81977857880">0977-85-7880</a></p>
+        <p class="note">想搶第一輪就 10:15 前到店門口。<b>但代價是湯の坪街道只剩 1 小時</b> —— 想慢慢逛就晚點來，尖峰排約 40 分。兩種都行，看你們那天想怎麼過。</p>
+      </div>
+    </div>
+    <div class="stop flow" data-at="12:30">
+      <div class="t">午後<em>休憩</em></div>
+      <div class="c">
+        <a class="ja" href="https://maps.app.goo.gl/yBYXBHEwutoiPYK37" target="_blank" rel="noopener">由布岳登山口</a>
+        <p class="zh">由布岳山腳 · 走走休息<a class="map" href="https://maps.app.goo.gl/yBYXBHEwutoiPYK37" target="_blank" rel="noopener">地図</a></p>
+        <p class="move">「心」から 約2km · 這時候才需要開車</p>
+        <p class="note">不是要登頂，就是下車看山、吹風。往別府的路上順路。</p>
+      </div>
+    </div>
+    <div class="stop flow" data-at="14:00">
+      <div class="t">午後<em>索道</em></div>
+      <div class="c">
+        <a class="ja" href="https://maps.app.goo.gl/fds7mAvjC3h4QbRU9" target="_blank" rel="noopener">別府ロープウェイ</a>
+        <p class="zh">鶴見岳 1,374m · 纜車約 10 分<a class="map" href="https://maps.app.goo.gl/fds7mAvjC3h4QbRU9" target="_blank" rel="noopener">地図</a></p>
+        <p class="move">由布岳登山口 → 約5km · 往復 ¥1,800／片道 ¥1,200 · <b>上り最終 17:00・下り最終 17:30</b></p>
+        <p class="note">今天唯一有時限的一站，但你 14:00 就到，非常寬。<b>山上帶件外套</b> —— 1,374m 比別府市區低約 8°C，而且風大，九月山頂會冷。</p>
+      </div>
+    </div>
+    <div class="stop flow" data-at="16:30">
+      <div class="t">夕<em>宿</em></div>
+      <div class="c">
+        <a class="ja" href="https://maps.app.goo.gl/hUAENiPLenEadK4w9" target="_blank" rel="noopener">SEKIYA RESORT テラス御堂原</a>
+        <p class="zh">別府 · 入住 · 客室附半露天風呂<a class="map" href="https://maps.app.goo.gl/hUAENiPLenEadK4w9" target="_blank" rel="noopener">地図</a></p>
+        <p class="move">ロープウェイ → 約4km</p>
+        <p class="note">在山上，開車進出都要繞。明天回機場也是從這裡下山，先熟悉一下路。</p>
+      </div>
+    </div>
+    <div class="stop flow" data-at="17:30">
+      <div class="t">夕<em>買物</em></div>
+      <div class="c">
+        <a class="ja" href="https://maps.app.goo.gl/7SQnR83r4iwjmbmo6" target="_blank" rel="noopener">ゆめタウン別府</a>
+        <p class="zh">大型商場 · 補貨<a class="map" href="https://maps.app.goo.gl/7SQnR83r4iwjmbmo6" target="_blank" rel="noopener">地図</a></p>
+        <p class="move">テラス御堂原 → 約4km</p>
+        <p class="note">回程前最後一次好買的地方 —— 明天只有下山跟開回福岡，沒空逛。伴手禮、藥妝、零食在這裡解決。</p>
+      </div>
+    </div>
+    <div class="stop flow" data-at="19:00">
+      <div class="t">夜<em>夕食</em></div>
+      <div class="c">
+        <a class="ja" href="https://maps.app.goo.gl/FT1Ng38WrwjHX9tL6" target="_blank" rel="noopener">水天 別府 山の手店</a>
+        <p class="zh">晚餐<a class="map" href="https://maps.app.goo.gl/FT1Ng38WrwjHX9tL6" target="_blank" rel="noopener">地図</a></p>
+        <p class="move">ゆめタウン → 約2km · テラス御堂原 まで 約3km</p>
+        <p class="note">離飯店很近，吃完直接回去。明天 13:30 就要出發回福岡，今晚別太晚。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ 八番 9.26 ══════════════ -->
+<section id="p8">
+  <div class="hero">
+    <span class="numeral">八番</span>
+    <p class="zone">宇佐・玖珠・日田</p>
+    <p class="md">9.26</p>
+    <p class="dow">土曜 SAT</p>
+  </div>
+  <div class="track">
+    <div class="stop " data-at="08:00">
+      <div class="t">08:00<em>OUT</em></div>
+      <div class="c">
+        <a class="ja" href="https://maps.app.goo.gl/hUAENiPLenEadK4w9" target="_blank" rel="noopener">SEKIYA RESORT テラス御堂原</a>
+        <p class="zh">退房 · 行李上車<a class="map" href="https://maps.app.goo.gl/hUAENiPLenEadK4w9" target="_blank" rel="noopener">地図</a></p>
+        <p class="move">OUT 10:00 · 提早退 · 山上，下山要繞</p>
+        <p class="note">先退房再吃早餐，就不用為了退房再爬一次山。代價是房間的半露天風呂少泡一個早上 —— 想多泡就往後挪，但後面每一格都會跟著擠。</p>
+      </div>
+    </div>
+    <div class="stop flow" data-at="08:30">
+      <div class="t">朝<em>朝食</em></div>
+      <div class="c">
+        <a class="ja" href="https://maps.app.goo.gl/TGk3UoL5FzbWzmVHA" target="_blank" rel="noopener">tsuchiumu ツチウム</a>
+        <p class="zh">別府市北浜 1-10-1 · 銀座土産品センタービル 1F<a class="map" href="https://maps.app.goo.gl/TGk3UoL5FzbWzmVHA" target="_blank" rel="noopener">地図</a></p>
+        <p class="move">テラス御堂原 → 約3.5km／15分（下山）· 朝昼 08:30–14:00 · 定休 水（朝昼）・木 → 9/26 是週六，有開</p>
+        <p class="note">08:30 開店，剛好第一批進去。行李已經在車上，吃完直接往動物園，不回飯店。</p>
+      </div>
+    </div>
+    <div class="stop flow" data-at="09:50">
+      <div class="t">午前<em>遊園</em></div>
+      <div class="c">
+        <a class="ja" href="https://maps.app.goo.gl/HLdaZBrtxSCddHJ47" target="_blank" rel="noopener">九州自然動物公園 アフリカンサファリ</a>
+        <p class="zh">宇佐市 · 自家用車直接開進動物區<a class="map" href="https://maps.app.goo.gl/HLdaZBrtxSCddHJ47" target="_blank" rel="noopener">地図</a></p>
+        <p class="move">tsuchiumu → 約22km／35分 · 3–10月 09:30–16:30 · ¥2,600／人 · 動物ゾーン一周 約50分</p>
+        <p class="note">自家用車可以直接開進去（只有敞篷車要換ジャングルバス，你的小型車沒問題）。<b>9/26 是週六</b>，入口可能排隊，而且車速跟著前車走 —— 這是今天最不可控的一段，抓 1 小時 10 分。<b>先退房再吃早餐，就是為了比原本早 30 分鐘站在這裡</b> —— 這 30 分鐘全部變成後面的緩衝。</p>
+      </div>
+    </div>
+    <div class="rest">
+      <span class="rb"><i>休</i></span>
+      <div class="rl">
+        <a href="https://maps.app.goo.gl/5hFtjv4huy6v1oreA" target="_blank" rel="noopener">由布岳PA（上り）<em>トイレ・売店</em></a>
+        <a href="https://maps.app.goo.gl/jWJphtVk8onQdNzQ9" target="_blank" rel="noopener">道の駅 童話の里・くす<em>売店・食事</em></a>
+      </div>
+    </div>
+    <div class="stop flow" data-at="11:45">
+      <div class="t">昼<em>寄道</em></div>
+      <div class="c">
+        <a class="ja" href="https://maps.app.goo.gl/ahcSRdBPdjH5Rd4y5" target="_blank" rel="noopener">豊後森機関庫 · 9600形 29612号機</a>
+        <p class="zh">玖珠町 · 扇形機関庫遺構<a class="map" href="https://maps.app.goo.gl/ahcSRdBPdjH5Rd4y5" target="_blank" rel="noopener">地図</a></p>
+        <p class="move">サファリ → 大分道 速見IC → 湯布院 → 玖珠IC · 約45km／45分</p>
+        <p class="note"><b>這站是今天的緩衝閥。</b>如果動物園出來已經超過 11:15，直接跳過往日田 —— 後面沒有別的地方可以省了。</p>
+      </div>
+    </div>
+    <div class="rest">
+      <span class="rb"><i>休</i></span>
+      <div class="rl">
+        <a href="https://maps.app.goo.gl/WDJ6JCf6ivrXA3ZJ9" target="_blank" rel="noopener">玖珠SA（上り）<em>売店・食事</em></a>
+      </div>
+    </div>
+    <div class="stop flow" data-at="12:45">
+      <div class="t">昼<em>昼食</em></div>
+      <div class="c">
+        <a class="ja" href="https://www.google.com/maps/search/?api=1&amp;query=%E6%97%A5%E7%94%B0%E5%B8%82%20%E8%B1%86%E7%94%B0%E7%94%BA" target="_blank" rel="noopener">日田市</a>
+        <p class="zh">午餐<span class="todo"> · 店未定</span><a class="map" href="https://www.google.com/maps/search/?api=1&amp;query=%E6%97%A5%E7%94%B0%E5%B8%82%20%E8%B1%86%E7%94%B0%E7%94%BA" target="_blank" rel="noopener">地図</a></p>
+        <p class="move">玖珠 → 大分道 日田IC · 約30km／25分</p>
+        <p class="note">豆田町是老街區，吃的選擇多。日田名物是日田焼きそば和鰻魚飯。<b>店給我我補上地圖</b>。</p>
+      </div>
+    </div>
+    <div class="stop key" data-at="14:30">
+      <div class="t">14:30<em>逆算</em></div>
+      <div class="c">
+        <span class="ja">日田 出発 → 福岡空港</span>
+        <p class="zh">這是今天唯一不能讓的時間</p>
+        <p class="move">大分道 日田IC → 鳥栖JCT → 九州道 → 福岡都市高速 · 約100km／1小時20分</p>
+        <p class="note">從 19:10 的班機一路回推：報到 17:10 ← 接駁 25 分 ← 還車手續 20 分 ← 加油 15 分 ← 車程 1 小時 20 分。<b>14:30 還沒上高速就開始吃緩衝了。</b>午餐吃到一半該走就走。<br>這段路上有三個休息站（見下），但<b>今天停一次就是從機場的緩衝裡扣</b> —— 除非真的需要上廁所或加油，直接開到底。</p>
+      </div>
+    </div>
+    <div class="rest">
+      <span class="rb"><i>休</i></span>
+      <div class="rl">
+        <a href="https://maps.app.goo.gl/o8FkbFfy1CUJc62eA" target="_blank" rel="noopener">山田SA（上り）<em>売店・食事</em></a>
+        <a href="https://maps.app.goo.gl/TRHL1XtiD1GefySq6" target="_blank" rel="noopener">井上PA（上り）<em>トイレ・売店</em></a>
+        <a href="https://maps.app.goo.gl/AzNu33Fyf4EtzTVA9" target="_blank" rel="noopener">基山PA（上り）<em>トイレ・売店</em></a>
+      </div>
+    </div>
+    <div class="stop key" data-at="16:20">
+      <div class="t">16:20<em>返車</em></div>
+      <div class="c">
+        <a class="ja" href="https://www.google.com/maps/search/?api=1&amp;query=%E7%A6%8F%E5%B2%A1%E7%9C%8C%E7%A6%8F%E5%B2%A1%E5%B8%82%E5%8D%9A%E5%A4%9A%E5%8C%BA%E5%8D%8A%E9%81%93%E6%A9%8B2-9-34%20%E3%82%AA%E3%83%AA%E3%83%83%E3%82%AF%E3%82%B9%E3%83%AC%E3%83%B3%E3%82%BF%E3%82%AB%E3%83%BC" target="_blank" rel="noopener">ORIX 福岡空港国際線ターミナル店</a>
+        <p class="zh">還車 · 滿油返還<a class="map" href="https://www.google.com/maps/search/?api=1&amp;query=%E7%A6%8F%E5%B2%A1%E7%9C%8C%E7%A6%8F%E5%B2%A1%E5%B8%82%E5%8D%9A%E5%A4%9A%E5%8C%BA%E5%8D%8A%E9%81%93%E6%A9%8B2-9-34%20%E3%82%AA%E3%83%AA%E3%83%83%E3%82%AF%E3%82%B9%E3%83%AC%E3%83%B3%E3%82%BF%E3%82%AB%E3%83%BC" target="_blank" rel="noopener">地図</a></p>
+        <p class="move">福岡市博多區半道橋 2-9-34 · 還車後搭 ORIX 免費接駁車 → 国際線ターミナル 約25分（含等車）</p>
+        <p class="note"><b>不在航廈裡</b>，導航輸入半道橋地址，不要導「福岡空港」。租約期限 17:00，提早還沒差。附近國道 3 號有加油站，先加滿再進場。</p>
+        <a class="gas" href="https://www.google.com/maps/search/?api=1&amp;query=%E3%82%AC%E3%82%BD%E3%83%AA%E3%83%B3%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89" target="_blank" rel="noopener"><span class="gi">油</span><span class="gl">搜尋附近加油站<em>ガソリンスタンド</em></span></a>
+      </div>
+    </div>
+    <div class="stop key" data-at="17:10">
+      <div class="t">17:10<em>締切</em></div>
+      <div class="c">
+        <a class="ja" href="https://www.google.com/maps/search/?api=1&amp;query=%E7%A6%8F%E5%B2%A1%E7%A9%BA%E6%B8%AF%E5%9B%BD%E9%9A%9B%E7%B7%9A%E3%82%BF%E3%83%BC%E3%83%9F%E3%83%8A%E3%83%AB" target="_blank" rel="noopener">福岡空港 国際線ターミナル</a>
+        <p class="zh">報到 · CI129 19:10 発<a class="map" href="https://www.google.com/maps/search/?api=1&amp;query=%E7%A6%8F%E5%B2%A1%E7%A9%BA%E6%B8%AF%E5%9B%BD%E9%9A%9B%E7%B7%9A%E3%82%BF%E3%83%BC%E3%83%9F%E3%83%8A%E3%83%AB" target="_blank" rel="noopener">地図</a></p>
+        <p class="move">國際線建議提前 2 小時</p>
+      </div>
+    </div>
+    <div class="stop key" data-at="19:10">
+      <div class="t">19:10<em>発</em></div>
+      <div class="c">
+        <span class="ja">CI129 福岡 → 台北</span>
+        <p class="zh">中華航空 · 飛行約 2 小時 25 分 · 20:35 抵達桃園 T2</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<style>
+/* ---- CSS-only tab switching. No JS needed; iOS Quick Look safe. ---- */
+#t0:checked~.rail label[for=t0],#t1:checked~.rail label[for=t1],
+#t2:checked~.rail label[for=t2],#t3:checked~.rail label[for=t3],
+#t4:checked~.rail label[for=t4],#t5:checked~.rail label[for=t5],
+#t6:checked~.rail label[for=t6],#t7:checked~.rail label[for=t7],
+#t8:checked~.rail label[for=t8]{background:var(--ink);color:var(--paper)}
+
+#t0:checked~.rail label[for=t0] .sm,#t1:checked~.rail label[for=t1] .sm,
+#t2:checked~.rail label[for=t2] .sm,#t3:checked~.rail label[for=t3] .sm,
+#t4:checked~.rail label[for=t4] .sm,#t5:checked~.rail label[for=t5] .sm,
+#t6:checked~.rail label[for=t6] .sm,#t7:checked~.rail label[for=t7] .sm,
+#t8:checked~.rail label[for=t8] .sm{color:var(--shu)}
+
+#t0:checked~.panels #p0,#t1:checked~.panels #p1,#t2:checked~.panels #p2,
+#t3:checked~.panels #p3,#t4:checked~.panels #p4,#t5:checked~.panels #p5,
+#t6:checked~.panels #p6,#t7:checked~.panels #p7,#t8:checked~.panels #p8{display:block}
+
+/* keyboard focus stays visible even though the radios are hidden */
+#t0:focus-visible~.rail label[for=t0],#t1:focus-visible~.rail label[for=t1],
+#t2:focus-visible~.rail label[for=t2],#t3:focus-visible~.rail label[for=t3],
+#t4:focus-visible~.rail label[for=t4],#t5:focus-visible~.rail label[for=t5],
+#t6:focus-visible~.rail label[for=t6],#t7:focus-visible~.rail label[for=t7],
+#t8:focus-visible~.rail label[for=t8]{outline:3px solid var(--shu);outline-offset:-3px}
+</style>
+
+<script>
+/* Enhancement only. Without JS: tabs still switch, 手引 opens first,
+   and every day is fully readable. JS adds three things —
+   today's tab, the 現在 race line, and the countdown.        */
+(function () {
+  'use strict';
+  var DAYS = ['2026-09-19','2026-09-20','2026-09-21','2026-09-22',
+              '2026-09-23','2026-09-24','2026-09-25','2026-09-26'];
+
+  function ymd(d){
+    return d.getFullYear() + '-' +
+           String(d.getMonth() + 1).padStart(2, '0') + '-' +
+           String(d.getDate()).padStart(2, '0');
+  }
+
+  var now = new Date();
+  var i = DAYS.indexOf(ymd(now));
+
+  /* ---- not travelling: countdown on 手引 ---- */
+  if (i < 0) {
+    var gap = Math.round((new Date(DAYS[0] + 'T00:00:00') - now) / 864e5);
+    var box = document.getElementById('clock');
+    box.querySelector('b').textContent =
+      gap > 0 ? gap + ' 日' : gap === 0 ? '本日出立' : '結願';
+    if (gap <= 0) box.querySelector('span').textContent =
+      gap === 0 ? '出立' : '道中記';
+    box.style.display = 'block';
+    return;
+  }
+
+  /* ---- travelling: open today, mark its tab ---- */
+  var id = 't' + (i + 1);
+  document.getElementById(id).checked = true;
+  var tab = document.querySelector('.rail label[for=' + id + ']');
+  tab.classList.add('today');
+  tab.scrollIntoView({ inline: 'center', block: 'nearest' });
+
+  /* ---- 現在: drop the race line at the right point in today's track ---- */
+  var track = document.querySelector('#p' + (i + 1) + ' .track');
+  var stops = track.querySelectorAll('.stop');
+  if (!stops.length) return;
+
+  var mins = now.getHours() * 60 + now.getMinutes();
+  var line = document.createElement('div');
+  line.className = 'now';
+  line.innerHTML = '<span class="dot"></span><span class="bar"></span>' +
+    '<span class="lbl">現在 ' + String(now.getHours()).padStart(2, '0') +
+    ':' + String(now.getMinutes()).padStart(2, '0') + '</span>';
+
+  // data-at, not the visible label — so a 「昼」stop still sorts correctly.
+  var next = null;
+  for (var k = 0; k < stops.length; k++) {
+    var at = (stops[k].getAttribute('data-at') || '').split(':');
+    if (at.length === 2 && (+at[0] * 60 + +at[1]) > mins) { next = stops[k]; break; }
+  }
+  next ? track.insertBefore(line, next) : track.appendChild(line);
+  setTimeout(function(){ line.scrollIntoView({block:'center'}); }, 380);
+})();
+</script>
+</body>
+</html>
