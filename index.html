@@ -319,7 +319,11 @@ dl{margin:0}
   border:1px solid var(--shu); border-left-width:5px;
   font-family:var(--tc); font-size:12.5px; line-height:1.7; color:var(--ink);
 }
-.warn b{
+/* inline emphasis inside the body text */
+.warn b{font-weight:700}
+/* only the leading <b> is the heading — otherwise every bolded word in the
+   sentence became its own red line and broke the prose apart */
+.warn>b:first-child{
   display:block; margin-bottom:5px;
   font-family:var(--jp); font-size:12px; font-weight:900;
   letter-spacing:.14em; color:var(--shu);
@@ -390,6 +394,7 @@ a{color:var(--shu)}
 <input type="radio" name="d" id="t6" aria-label="六番山笠 9月24日">
 <input type="radio" name="d" id="t7" aria-label="七番山笠 9月25日">
 <input type="radio" name="d" id="t8" aria-label="八番山笠 9月26日">
+<input type="radio" name="d" id="t9" aria-label="運転 自駕須知">
 
 <div class="mast">
   <span class="mark">九州馳之旅</span>
@@ -406,6 +411,7 @@ a{color:var(--shu)}
   <label for="t6"><span class="glyph">六</span><span class="sm">9.24</span></label>
   <label for="t7"><span class="glyph">七</span><span class="sm">9.25</span></label>
   <label for="t8"><span class="glyph">八</span><span class="sm">9.26</span></label>
+  <label for="t9"><span class="glyph">運転</span><span class="sm">DRIVE</span></label>
 </nav>
 
 <main class="panels">
@@ -508,41 +514,18 @@ a{color:var(--shu)}
     </div>
 
     <div class="card">
-      <h2>交 通<i>票券</i></h2>
+      <h2>交 通<i>Suica のみ</i></h2>
       <dl>
-        <div class="row"><dt>ICカード</dt><dd class="todo">SUGOCA／はやかけん／ICOCA</dd></div>
-        <div class="row"><dt>周遊券</dt><dd class="todo">JR北九州パス？地下鉄一日乗車券？</dd></div>
+        <div class="row"><dt>ICカード</dt><dd>Suica<p class="lzh">全國相互利用 —— 九州的 JR、地下鐵、西鐵、公車都能直接刷，不必另外辦 SUGOCA</p></dd></div>
+        <div class="row"><dt>周遊券</dt><dd class="todo">不使用</dd></div>
       </dl>
-    </div>
-
-
-    <div class="card">
-      <h2>運 転<i>租車自駕 · 9.23–9.26</i></h2>
-      <dl>
-        <div class="row"><dt>会社</dt><dd>ORIX レンタカー</dd></div>
-        <div class="row"><dt>車両</dt><dd>SA CLASS Campaign Limited<p class="lzh">小型車 · 禁菸</p></dd></div>
-        <div class="row">
-          <dt>貸出 取車</dt>
-          <dd>
-            <a class="lja" href="https://www.google.com/maps/search/?api=1&amp;query=%E3%82%AA%E3%83%AA%E3%83%83%E3%82%AF%E3%82%B9%E3%83%AC%E3%83%B3%E3%82%BF%E3%82%AB%E3%83%BC%20%E5%8D%9A%E5%A4%9A%E9%A7%85%E5%8D%9A%E5%A4%9A%E5%8F%A3%E5%BA%97" target="_blank" rel="noopener">博多駅 博多口店</a><a class="map" href="https://www.google.com/maps/search/?api=1&amp;query=%E3%82%AA%E3%83%AA%E3%83%83%E3%82%AF%E3%82%B9%E3%83%AC%E3%83%B3%E3%82%BF%E3%82%AB%E3%83%BC%20%E5%8D%9A%E5%A4%9A%E9%A7%85%E5%8D%9A%E5%A4%9A%E5%8F%A3%E5%BA%97" target="_blank" rel="noopener">地図</a>
-            <p class="lzh">9.23（水）<b>09:30</b></p>
-          </dd>
-        </div>
-        <div class="row">
-          <dt>返却 還車</dt>
-          <dd>
-            <a class="lja" href="https://www.google.com/maps/search/?api=1&amp;query=%E7%A6%8F%E5%B2%A1%E7%9C%8C%E7%A6%8F%E5%B2%A1%E5%B8%82%E5%8D%9A%E5%A4%9A%E5%8C%BA%E5%8D%8A%E9%81%93%E6%A9%8B2-9-34%20%E3%82%AA%E3%83%AA%E3%83%83%E3%82%AF%E3%82%B9%E3%83%AC%E3%83%B3%E3%82%BF%E3%82%AB%E3%83%BC" target="_blank" rel="noopener">福岡空港 国際線ターミナル店</a><a class="map" href="https://www.google.com/maps/search/?api=1&amp;query=%E7%A6%8F%E5%B2%A1%E7%9C%8C%E7%A6%8F%E5%B2%A1%E5%B8%82%E5%8D%9A%E5%A4%9A%E5%8C%BA%E5%8D%8A%E9%81%93%E6%A9%8B2-9-34%20%E3%82%AA%E3%83%AA%E3%83%83%E3%82%AF%E3%82%B9%E3%83%AC%E3%83%B3%E3%82%BF%E3%82%AB%E3%83%BC" target="_blank" rel="noopener">地図</a>
-            <p class="lzh">9.26（土）<b>17:00</b> 期限 · 可提早還<br>福岡市博多區半道橋 2-9-34</p>
-          </dd>
-        </div>
-      </dl>
-      <a class="gas" href="https://www.google.com/maps/search/?api=1&amp;query=%E3%82%AC%E3%82%BD%E3%83%AA%E3%83%B3%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89" target="_blank" rel="noopener"><span class="gi">油</span><span class="gl">搜尋附近加油站<em>ガソリンスタンド</em></span></a>
       <div class="warn">
-        <b>自駕要帶的</b>
-        日本監理所認可的<b>日文譯本</b>（台灣駕照＋譯本，公路總局或日本台灣交流協會辦，正本駕照也要帶）。
-        缺譯本現場租不到車。另外高速公路建議借 ETC 卡，九州道＋大分道這幾段收費站不少。<br><br>還車點<b>不在航廈裡</b> —— 在機場外的半道橋，還完車要搭 ORIX 免費接駁車回國際線航廈。導航請直接輸入半道橋地址，不要導「福岡空港」。
+        <b>Suica 刷不過的地方</b>
+        <b>新幹線</b>（9/20 博多↔小倉那兩段）—— 要在售票機另外買「乗車券＋自由席特急券」，Suica 不能直接進新幹線閘門。<br>
+        <b>関門汽船</b>（門司港↔唐戸）、<b>潮風号</b>、<b>有明フェリー</b>（9/24 車渡）—— 都是現場付款，備現金。
       </div>
     </div>
+
 
     <div class="card">
       <h2>非 常<i>緊急聯絡</i></h2>
@@ -601,7 +584,7 @@ a{color:var(--shu)}
         <a class="ja" href="https://www.google.com/maps/search/?api=1&amp;query=%E7%A6%8F%E5%B2%A1%E7%A9%BA%E6%B8%AF%E5%9B%BD%E9%9A%9B%E7%B7%9A%E3%82%BF%E3%83%BC%E3%83%9F%E3%83%8A%E3%83%AB" target="_blank" rel="noopener">福岡空港 国際線ターミナル</a>
         <p class="zh">福岡機場 國際線航廈<a class="map" href="https://www.google.com/maps/search/?api=1&amp;query=%E7%A6%8F%E5%B2%A1%E7%A9%BA%E6%B8%AF%E5%9B%BD%E9%9A%9B%E7%B7%9A%E3%82%BF%E3%83%BC%E3%83%9F%E3%83%8A%E3%83%AB" target="_blank" rel="noopener">地図</a></p>
         <p class="move">入国審査 → 受託手荷物 → 出口</p>
-        <p class="note">出關後先辦 IC 卡（SUGOCA／はやかけん）。</p>
+        <p class="note">已經有 Suica，不用在機場辦卡。確認餘額夠，不夠就在便利商店或站內チャージ機加值（實體卡只收現金）。</p>
       </div>
     </div>
     <div class="stop flow" data-at="11:00">
@@ -1252,6 +1235,119 @@ a{color:var(--shu)}
   </div>
 </section>
 
+
+<!-- ══════════════ 運転 ══════════════ -->
+<section id="p9">
+  <div class="brief">
+
+    <div class="warn">
+      <b>只有一件事會毀掉這趟自駕</b>
+      加油時看到「<b>軽油</b>」千萬不要加。那兩個字看起來像「輕」，實際上是<b>柴油</b>。
+      你的 SA CLASS 小型車吃汽油，加了柴油引擎會壞，租車保險通常不賠。
+      <br><br>
+      你要的是 <b>レギュラー</b>（紅色）。
+    </div>
+
+    <div class="card">
+      <h2>予 約<i>ORIX · 9.23–9.26</i></h2>
+      <dl>
+        <div class="row"><dt>会社</dt><dd>ORIX レンタカー</dd></div>
+        <div class="row"><dt>車両</dt><dd>SA CLASS Campaign Limited<p class="lzh">小型車 · 禁菸</p></dd></div>
+        <div class="row">
+          <dt>貸出 取車</dt>
+          <dd>
+            <a class="lja" href="https://www.google.com/maps/search/?api=1&amp;query=%E3%82%AA%E3%83%AA%E3%83%83%E3%82%AF%E3%82%B9%E3%83%AC%E3%83%B3%E3%82%BF%E3%82%AB%E3%83%BC%20%E5%8D%9A%E5%A4%9A%E9%A7%85%E5%8D%9A%E5%A4%9A%E5%8F%A3%E5%BA%97" target="_blank" rel="noopener">博多駅 博多口店</a><a class="map" href="https://www.google.com/maps/search/?api=1&amp;query=%E3%82%AA%E3%83%AA%E3%83%83%E3%82%AF%E3%82%B9%E3%83%AC%E3%83%B3%E3%82%BF%E3%82%AB%E3%83%BC%20%E5%8D%9A%E5%A4%9A%E9%A7%85%E5%8D%9A%E5%A4%9A%E5%8F%A3%E5%BA%97" target="_blank" rel="noopener">地図</a>
+            <p class="lzh">9.23（水）<b>09:30</b></p>
+          </dd>
+        </div>
+        <div class="row">
+          <dt>返却 還車</dt>
+          <dd>
+            <a class="lja" href="https://www.google.com/maps/search/?api=1&amp;query=%E7%A6%8F%E5%B2%A1%E7%9C%8C%E7%A6%8F%E5%B2%A1%E5%B8%82%E5%8D%9A%E5%A4%9A%E5%8C%BA%E5%8D%8A%E9%81%93%E6%A9%8B2-9-34%20%E3%82%AA%E3%83%AA%E3%83%83%E3%82%AF%E3%82%B9%E3%83%AC%E3%83%B3%E3%82%BF%E3%82%AB%E3%83%BC" target="_blank" rel="noopener">福岡空港 国際線ターミナル店</a><a class="map" href="https://www.google.com/maps/search/?api=1&amp;query=%E7%A6%8F%E5%B2%A1%E7%9C%8C%E7%A6%8F%E5%B2%A1%E5%B8%82%E5%8D%9A%E5%A4%9A%E5%8C%BA%E5%8D%8A%E9%81%93%E6%A9%8B2-9-34%20%E3%82%AA%E3%83%AA%E3%83%83%E3%82%AF%E3%82%B9%E3%83%AC%E3%83%B3%E3%82%BF%E3%82%AB%E3%83%BC" target="_blank" rel="noopener">地図</a>
+            <p class="lzh">9.26（土）<b>17:00</b> 期限 · 可提早還<br>福岡市博多區半道橋 2-9-34</p>
+          </dd>
+        </div>
+      </dl>
+      <div class="warn">
+        <b>自駕要帶的</b>
+        日本監理所認可的<b>日文譯本</b>（台灣駕照＋譯本，公路總局或日本台灣交流協會辦，正本駕照也要帶）。
+        缺譯本現場租不到車。另外高速公路建議借 ETC 卡，九州道＋大分道這幾段收費站不少。<br><br>還車點<b>不在航廈裡</b> —— 在機場外的半道橋，還完車要搭 ORIX 免費接駁車回國際線航廈。導航請直接輸入半道橋地址，不要導「福岡空港」。
+      </div>
+    </div>
+
+
+    <div class="card">
+      <h2>給 油<i>加油</i></h2>
+      <dl>
+        <div class="row"><dt>レギュラー</dt><dd>一般汽油 · <b>紅色</b><p class="lzh">你的車加這個</p></dd></div>
+        <div class="row"><dt>ハイオク</dt><dd>高級汽油 · 黃色</dd></div>
+        <div class="row"><dt>軽油</dt><dd>柴油 · 綠色<p class="lzh">絕對不要</p></dd></div>
+      </dl>
+      <dl>
+        <div class="row"><dt>セルフ</dt><dd>自助。流程：觸摸靜電消除貼片 → 選付款方式 → 選油種 → 選「満タン」→ 加油<p class="lzh">螢幕多半有英文切換</p></dd></div>
+        <div class="row"><dt>フル</dt><dd>有人服務。直接說「レギュラー、満タンで」就好</dd></div>
+        <div class="row"><dt>還車前</dt><dd><b>満タン返還</b>。收據留著，ORIX 可能要看<p class="lzh">半道橋附近國道 3 號有加油站</p></dd></div>
+      </dl>
+      <a class="gas" href="https://www.google.com/maps/search/?api=1&amp;query=%E3%82%AC%E3%82%BD%E3%83%AA%E3%83%B3%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89" target="_blank" rel="noopener"><span class="gi">油</span><span class="gl">搜尋附近加油站<em>ガソリンスタンド</em></span></a>
+    </div>
+
+    <div class="card">
+      <h2>高 速<i>高速公路 · ETC</i></h2>
+      <dl>
+        <div class="row"><dt>有 ETC 卡</dt><dd>走紫色「ETC」車道，<b>減速到 20km/h 以下</b>再過，別停</dd></div>
+        <div class="row"><dt>沒 ETC 卡</dt><dd>走綠色「一般」車道，入口抽<b>通行券</b>，出口連券帶錢一起給</dd></div>
+        <div class="row"><dt>SA</dt><dd>サービスエリア · 大型，有餐廳、加油站、廁所</dd></div>
+        <div class="row"><dt>PA</dt><dd>パーキングエリア · 小型，多半只有廁所和販賣機</dd></div>
+        <div class="row"><dt>上り／下り</dt><dd>上り＝往東京／往起點方向，下り＝反向。<b>兩側是分開的設施，過了就回不去</b></dd></div>
+      </dl>
+    </div>
+
+    <div class="card">
+      <h2>駐 車<i>停車</i></h2>
+      <dl>
+        <div class="row"><dt>空車</dt><dd>有位</dd></div>
+        <div class="row"><dt>満車</dt><dd>滿了</dd></div>
+        <div class="row"><dt>フラップ式</dt><dd>停好後車底鐵板升起。到<b>精算機</b>輸入車位號碼付款，鐵板降下才能開走<p class="lzh">付完限時 3–5 分鐘內離場</p></dd></div>
+        <div class="row"><dt>前払い</dt><dd>先付。後払い＝後付</dd></div>
+        <div class="row"><dt>最大料金</dt><dd>當日上限。長時間停車先找有寫這個的</dd></div>
+      </dl>
+    </div>
+
+    <div class="card">
+      <h2>規 則<i>和台灣不一樣的地方</i></h2>
+      <dl>
+        <div class="row"><dt>方向</dt><dd><b>左側通行、右駕</b>。最容易錯的是路口右轉切進對向車道 —— 右轉是大彎，左轉是小彎</dd></div>
+        <div class="row"><dt>止まれ</dt><dd>紅色倒三角＝<b>完全停止</b>，不是減速。日本查得很嚴，山區小路口特別多</dd></div>
+        <div class="row"><dt>踏切</dt><dd>鐵道平交道，<b>一律停車再走</b>，就算沒有柵欄</dd></div>
+        <div class="row"><dt>紅燈</dt><dd>不能左轉（等同台灣的右轉），要等綠燈</dd></div>
+        <div class="row"><dt>限速</dt><dd>一般道 50–60，高速 80–100</dd></div>
+        <div class="row"><dt>酒駕</dt><dd><b>零容忍</b>，同車乘客也可能受罰。9/23 晚上走去蒸釜屋就是為了這個</dd></div>
+      </dl>
+    </div>
+
+    <div class="card">
+      <h2>一 言<i>現場用得到的句子</i></h2>
+      <dl>
+        <div class="row"><dt>加滿一般汽油</dt><dd><a class="lja">レギュラー、満タンで お願いします。</a></dd></div>
+        <div class="row"><dt>可以刷卡嗎</dt><dd><a class="lja">カードで払えますか？</a></dd></div>
+        <div class="row"><dt>請給我收據</dt><dd><a class="lja">領収書をください。</a></dd></div>
+        <div class="row"><dt>這條路通到○○嗎</dt><dd><a class="lja">この道は〇〇に行きますか？</a></dd></div>
+        <div class="row"><dt>停車場在哪</dt><dd><a class="lja">駐車場はどこですか？</a></dd></div>
+        <div class="row"><dt>我要還車</dt><dd><a class="lja">レンタカーを返却したいです。</a></dd></div>
+        <div class="row"><dt>我迷路了</dt><dd><a class="lja">道に迷いました。</a></dd></div>
+        <div class="row"><dt>我爆胎了</dt><dd><a class="lja">パンクしました。</a></dd></div>
+        <div class="row"><dt>我出車禍了，請叫警察</dt><dd><a class="lja">事故を起こしました。警察を呼んでください。</a></dd></div>
+        <div class="row"><dt>可以幫我拍照嗎</dt><dd><a class="lja">すみません、写真を撮ってもらえますか？</a></dd></div>
+      </dl>
+      <div class="warn">
+        <b>出事的順序</b>
+        先確認人有沒有受傷 → <b>110</b>（警察，一定要報，沒有報案證明保險不理）→ 打 ORIX 租車契約上的緊急電話 → 不要私下和解。
+      </div>
+    </div>
+
+  </div>
+</section>
+
 </main>
 
 <style>
@@ -1260,24 +1356,27 @@ a{color:var(--shu)}
 #t2:checked~.rail label[for=t2],#t3:checked~.rail label[for=t3],
 #t4:checked~.rail label[for=t4],#t5:checked~.rail label[for=t5],
 #t6:checked~.rail label[for=t6],#t7:checked~.rail label[for=t7],
-#t8:checked~.rail label[for=t8]{background:var(--ink);color:var(--paper)}
+#t8:checked~.rail label[for=t8],
+#t9:checked~.rail label[for=t9]{background:var(--ink);color:var(--paper)}
 
 #t0:checked~.rail label[for=t0] .sm,#t1:checked~.rail label[for=t1] .sm,
 #t2:checked~.rail label[for=t2] .sm,#t3:checked~.rail label[for=t3] .sm,
 #t4:checked~.rail label[for=t4] .sm,#t5:checked~.rail label[for=t5] .sm,
 #t6:checked~.rail label[for=t6] .sm,#t7:checked~.rail label[for=t7] .sm,
-#t8:checked~.rail label[for=t8] .sm{color:var(--shu)}
+#t8:checked~.rail label[for=t8] .sm,
+#t9:checked~.rail label[for=t9] .sm{color:var(--shu)}
 
 #t0:checked~.panels #p0,#t1:checked~.panels #p1,#t2:checked~.panels #p2,
 #t3:checked~.panels #p3,#t4:checked~.panels #p4,#t5:checked~.panels #p5,
-#t6:checked~.panels #p6,#t7:checked~.panels #p7,#t8:checked~.panels #p8{display:block}
+#t6:checked~.panels #p6,#t7:checked~.panels #p7,#t8:checked~.panels #p8,#t9:checked~.panels #p9{display:block}
 
 /* keyboard focus stays visible even though the radios are hidden */
 #t0:focus-visible~.rail label[for=t0],#t1:focus-visible~.rail label[for=t1],
 #t2:focus-visible~.rail label[for=t2],#t3:focus-visible~.rail label[for=t3],
 #t4:focus-visible~.rail label[for=t4],#t5:focus-visible~.rail label[for=t5],
 #t6:focus-visible~.rail label[for=t6],#t7:focus-visible~.rail label[for=t7],
-#t8:focus-visible~.rail label[for=t8]{outline:3px solid var(--shu);outline-offset:-3px}
+#t8:focus-visible~.rail label[for=t8],
+#t9:focus-visible~.rail label[for=t9]{outline:3px solid var(--shu);outline-offset:-3px}
 </style>
 
 <script>
