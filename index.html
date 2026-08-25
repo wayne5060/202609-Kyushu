@@ -313,6 +313,30 @@ dl{margin:0}
   letter-spacing:.08em; margin-left:7px; opacity:.75;
 }
 
+/* A list of tappable places belonging to one stop: either candidates to pick
+   between, or a walkable cluster to work through. Same shape as .rest but
+   ink-weight and full size — these are the plan, not a fallback. */
+.pick{margin:8px 0 0}
+.pick a{
+  display:block; padding:5px 0; text-decoration:none;
+  font-size:16px; font-weight:700; line-height:1.4; color:var(--ink);
+}
+.pick a::before{content:"\25B8\2002"; color:var(--shu); font-weight:800}
+.pick a em{
+  font-style:normal; font-family:var(--tc); font-size:11.5px; font-weight:400;
+  letter-spacing:.06em; color:var(--gray); margin-left:8px;
+}
+
+/* Shops inside one building, with the floor you need. Not a choice and not
+   optional — a directory. No markers, no per-shop map link: the building's
+   own link is on the stop above. */
+.shops{margin:9px 0 0; border-left:2px solid var(--hair); padding-left:11px}
+.shops div{display:flex; gap:10px; font-size:14px; line-height:1.5; padding:2px 0}
+.shops b{
+  flex:0 0 27px; font-family:var(--num); font-weight:800; font-size:13px;
+  font-variant-numeric:tabular-nums; color:var(--shu); padding-top:1px;
+}
+
 /* a caution that has to survive being skimmed */
 .warn{
   margin:13px 0 2px; padding:11px 13px 12px;
@@ -617,10 +641,26 @@ a{color:var(--shu)}
     <div class="stop flow" data-at="18:30">
       <div class="t">夜<em>夕食</em></div>
       <div class="c">
-        <a class="ja" href="https://maps.app.goo.gl/LaLdifMjfqQ6oJnX9" target="_blank" rel="noopener">天神 屋台</a>
-        <p class="zh">到現場再挑<a class="map" href="https://maps.app.goo.gl/LaLdifMjfqQ6oJnX9" target="_blank" rel="noopener">地図</a></p>
-        <p class="move">天神から Hotel Mei まで徒歩 約10分</p>
-        <p class="note">屋台約 18:00 後陸續開，多為現金。回飯店走得到，不用擔心末班車。今天 3 點多就起床了，累就早點收。</p>
+        <span class="ja">薬院・平尾 五択</span>
+        <p class="zh">當天再決定</p>
+        <p class="move">Hotel Mei から 徒歩 約15分（1.2km）／ 七隈線 渡辺通 → 薬院 1駅</p>
+        <div class="pick">
+          <a href="https://maps.app.goo.gl/s71MUr7jsryD4d1K6" target="_blank" rel="noopener">Udon Komaru</a>
+          <a href="https://maps.app.goo.gl/SZX5zR1Xoi85u27R7" target="_blank" rel="noopener">炭焼 まるた</a>
+          <a href="https://maps.app.goo.gl/xDi4uh4G4RDjDUix5" target="_blank" rel="noopener">もも焼き屋 八幸鶏</a>
+          <a href="https://maps.app.goo.gl/pHcquCYf2siLa4T9A" target="_blank" rel="noopener">軍ぞう<em>焼き鳥 · 大宮 1-7-21</em></a>
+          <a href="https://maps.app.goo.gl/ediJUGvjTE4PYa8J6" target="_blank" rel="noopener">鶏と肴 フルヤ</a>
+        </div>
+        <p class="note">五家都在薬院・平尾一帶，彼此走得到，到了再挑。<b>今天 3 點多就起床了</b> —— 走不動就搭七隈線一站，或乾脆在春吉附近隨便吃，別硬撐。</p>
+      </div>
+    </div>
+    <div class="stop flow" data-at="21:00">
+      <div class="t">夜<em>一杯</em></div>
+      <div class="c">
+        <a class="ja" href="https://maps.app.goo.gl/f9ZMYCiu41H4amyQ9" target="_blank" rel="noopener">Notime Mixology Bar</a>
+        <p class="zh">調酒 · <span class="todo">有力氣再去</span><a class="map" href="https://maps.app.goo.gl/f9ZMYCiu41H4amyQ9" target="_blank" rel="noopener">地図</a></p>
+        <p class="move">薬院・平尾 から 徒歩 約12分 · Hotel Mei まで 徒歩 約6分（470m）</p>
+        <p class="note">在回飯店的路上，不繞。<b>但今天是最不可能有力氣的一天</b> —— 3 點多起床、飛一趟、還跑了鳥栖。撐不住就直接回去睡，這杯 9/21 也排了一次。</p>
       </div>
     </div>
   </div>
@@ -742,12 +782,21 @@ a{color:var(--shu)}
       </div>
     </div>
     <div class="stop flow" data-at="21:15">
-      <div class="t">夜<em>帰路</em></div>
+      <div class="t">夜<em>二次会</em></div>
       <div class="c">
-        <span class="ja">小倉 → Hotel Mei</span>
-        <p class="zh">回春吉 · 約 30 分</p>
-        <p class="move">新幹線 小倉→博多 16分 · 七隈線 博多→渡辺通 6分 · 徒歩</p>
-        <p class="note">新幹線末班很晚，不用趕。走在來線要 1 小時 20 分，這時間別走。</p>
+        <a class="ja" href="https://maps.app.goo.gl/R5A9wqEYGLmdF2og8" target="_blank" rel="noopener">カラオケ JOYSOUND 博多口駅前店</a>
+        <p class="zh">博多駅 西側<a class="map" href="https://maps.app.goo.gl/R5A9wqEYGLmdF2og8" target="_blank" rel="noopener">地図</a></p>
+        <p class="move">新幹線 小倉 → 博多 16分 · 博多駅から 徒歩</p>
+        <p class="note">新幹線末班很晚，吃完慢慢走。回程走在來線要 1 小時 20 分，這個時間別走。</p>
+      </div>
+    </div>
+    <div class="stop flow" data-at="23:30">
+      <div class="t">夜<em>帰宿</em></div>
+      <div class="c">
+        <a class="ja" href="https://maps.app.goo.gl/PyhaHUn1utn4BC2s5" target="_blank" rel="noopener">Hotel Mei 博多天神</a>
+        <p class="zh">回春吉<a class="map" href="https://maps.app.goo.gl/PyhaHUn1utn4BC2s5" target="_blank" rel="noopener">地図</a></p>
+        <p class="move">JOYSOUND から 徒歩 約9分（700m）</p>
+        <p class="note"><b>走得到，不用管末班車。</b>唱多晚都沒關係 —— 但隔天 9/21 還有一整天。</p>
       </div>
     </div>
   </div>
@@ -757,7 +806,7 @@ a{color:var(--shu)}
 <section id="p3">
   <div class="hero">
     <span class="numeral">三番</span>
-    <p class="zone">福岡市内</p>
+    <p class="zone">天神・大名</p>
     <p class="md">9.21</p>
     <p class="dow">月曜 MON</p>
   </div>
@@ -769,14 +818,144 @@ a{color:var(--shu)}
     </div>
     <a class="map" href="https://maps.app.goo.gl/PyhaHUn1utn4BC2s5" target="_blank" rel="noopener">地図</a>
   </div>
-  <div class="track"><div class="blank"><p>行程未定</p><small>把時間、地點、交通、備註給我，我填進來。</small></div></div>
+  <div class="track">
+    <div class="stop key" data-at="08:30">
+      <div class="t">08:30<em>予約</em></div>
+      <div class="c">
+        <a class="ja" href="https://maps.app.goo.gl/Ex5bEo3JkfhjKWa78" target="_blank" rel="noopener">Sabataro</a>
+        <p class="zh">早餐 · <b>已預約</b><a class="map" href="https://maps.app.goo.gl/Ex5bEo3JkfhjKWa78" target="_blank" rel="noopener">地図</a></p>
+        <p class="move">Hotel Mei から 約1.7km · 徒歩 約20分／タクシー 約7分</p>
+        <p class="note">今天唯一的早班約定。從飯店往西，跟等下的天神購物是同一個方向。</p>
+      </div>
+    </div>
+    <div class="stop flow" data-at="10:00">
+      <div class="t">午前<em>買物</em></div>
+      <div class="c">
+        <a class="ja" href="https://maps.app.goo.gl/MzX2PTP5Bd59y7QKA" target="_blank" rel="noopener">PARCO福岡 新館</a>
+        <p class="zh">天神 · 10:00 開店<a class="map" href="https://maps.app.goo.gl/MzX2PTP5Bd59y7QKA" target="_blank" rel="noopener">地図</a></p>
+        <p class="move">Sabataro から 徒歩 約12分</p>
+        <div class="shops">
+          <div><b>4F</b>FREAK'S STORE</div>
+          <div><b>3F</b>CHAV / HARE</div>
+          <div><b>1F</b>BEAMS</div>
+        </div>
+        <p class="note">百貨十點開，大名的街邊店多半要 11–12 點 —— 所以先百貨、下午再走大名，順序是對的。今天是敬老の日，人會很多。</p>
+      </div>
+    </div>
+    <div class="stop flow" data-at="10:45">
+      <div class="t">午前<em>買物</em></div>
+      <div class="c">
+        <a class="ja" href="https://maps.app.goo.gl/jtMqhsAcBDdaj9FX6" target="_blank" rel="noopener">PARCO福岡 本館</a>
+        <p class="zh">新館の隣<a class="map" href="https://maps.app.goo.gl/jtMqhsAcBDdaj9FX6" target="_blank" rel="noopener">地図</a></p>
+        <p class="move">新館 から 徒歩 1分</p>
+        <div class="shops">
+          <div><b>3F</b>Onitsuka Tiger / 9090</div>
+        </div>
+      </div>
+    </div>
+    <div class="stop flow" data-at="11:15">
+      <div class="t">午前<em>買物</em></div>
+      <div class="c">
+        <a class="ja" href="https://maps.app.goo.gl/MePjrPxvGSFVnwhFA" target="_blank" rel="noopener">ONE FUKUOKA BLDG.</a>
+        <p class="zh">ワンビル · PARCO の向かい<a class="map" href="https://maps.app.goo.gl/MePjrPxvGSFVnwhFA" target="_blank" rel="noopener">地図</a></p>
+        <p class="move">PARCO から 徒歩 2分</p>
+        <div class="shops">
+          <div><b>4F</b>蔦屋書店</div>
+          <div><b>2F</b>and wander / Salomon / Nike</div>
+        </div>
+      </div>
+    </div>
+    <div class="stop flow" data-at="11:45">
+      <div class="t">午前<em>買物</em></div>
+      <div class="c">
+        <a class="ja" href="https://maps.app.goo.gl/xP1tRKZ16Zz2mkdd7" target="_blank" rel="noopener">Mina 天神</a>
+        <p class="zh">天神北側<a class="map" href="https://maps.app.goo.gl/xP1tRKZ16Zz2mkdd7" target="_blank" rel="noopener">地図</a></p>
+        <p class="move">ONE FUKUOKA から 徒歩 約4分</p>
+        <div class="shops">
+          <div><b>5F</b>UNIQLO</div>
+        </div>
+      </div>
+    </div>
+    <div class="stop flow" data-at="12:30">
+      <div class="t">昼<em>昼食</em></div>
+      <div class="c">
+        <a class="ja" href="https://maps.app.goo.gl/HKDhB6uEx9YpLHB38" target="_blank" rel="noopener">博多らーめん ShinShin 天神本店</a>
+        <p class="zh">豚骨拉麵<a class="map" href="https://maps.app.goo.gl/HKDhB6uEx9YpLHB38" target="_blank" rel="noopener">地図</a></p>
+        <p class="move">Mina 天神 から 徒歩 約3分</p>
+        <p class="note">天神的人氣拉麵店，連假中午會排。</p>
+      </div>
+    </div>
+    <div class="stop flow" data-at="14:00">
+      <div class="t">午後<em>買物</em></div>
+      <div class="c">
+        <a class="ja" href="https://maps.app.goo.gl/k1Wt5LrtmTZVD88XA" target="_blank" rel="noopener">岩田屋 本店</a>
+        <p class="zh">天神 老牌百貨<a class="map" href="https://maps.app.goo.gl/k1Wt5LrtmTZVD88XA" target="_blank" rel="noopener">地図</a></p>
+        <p class="move">ShinShin から 徒歩 約6分</p>
+        <div class="shops">
+          <div><b>1F</b>SHIRO</div>
+          <div><b>B2</b>獺祭 Store</div>
+        </div>
+      </div>
+    </div>
+    <div class="stop flow" data-at="15:00">
+      <div class="t">午後<em>休憩</em></div>
+      <div class="c">
+        <a class="ja" href="https://maps.app.goo.gl/6HPssd9DfPYYT3BL7" target="_blank" rel="noopener">Blue Bottle Coffee 福岡天神</a>
+        <p class="zh">藍瓶咖啡<a class="map" href="https://maps.app.goo.gl/6HPssd9DfPYYT3BL7" target="_blank" rel="noopener">地図</a></p>
+        <p class="move">岩田屋 から 徒歩 約5分 · ここから大名エリア</p>
+        <p class="note">喝完就進大名。走了一上午，這杯是分水嶺 —— 下半場全是街邊店。</p>
+      </div>
+    </div>
+    <div class="stop flow" data-at="15:45">
+      <div class="t">午後<em>買物</em></div>
+      <div class="c">
+        <span class="ja">大名・今泉 十三店</span>
+        <p class="zh">看時間體力挑，沒有固定順序</p>
+        <p class="move">Blue Bottle から 徒歩圏内 · <b>十三家彼此都在 300m 內</b>，中間完全不用搭車</p>
+        <div class="pick">
+          <a href="https://maps.app.goo.gl/RKf9LiTQkJN59xSs9" target="_blank" rel="noopener">mont-bell 福岡天神店</a>
+          <a href="https://maps.app.goo.gl/sFfDEEq3yNd5Pxtu5" target="_blank" rel="noopener">Stussy</a>
+          <a href="https://maps.app.goo.gl/Un21uB7eMUW3Smhx9" target="_blank" rel="noopener">new balance 福岡店</a>
+          <a href="https://maps.app.goo.gl/wqzFzAUqpXsoEiHd8" target="_blank" rel="noopener">Arc'teryx</a>
+          <a href="https://maps.app.goo.gl/2F3DnsYad9S46SmD8" target="_blank" rel="noopener">THE NORTH FACE 福岡</a>
+          <a href="https://maps.app.goo.gl/ZZc439naAQoBzHAR7" target="_blank" rel="noopener">HUMAN MADE 福岡</a>
+          <a href="https://maps.app.goo.gl/WMTmVS42mTPux2AD7" target="_blank" rel="noopener">nanamica 福岡</a>
+          <a href="https://maps.app.goo.gl/shRHsY8vRQFyeDuu9" target="_blank" rel="noopener">Supreme</a>
+          <a href="https://maps.app.goo.gl/FGN4BHdFh7gyZ7gYA" target="_blank" rel="noopener">BILLY'S FUKUOKA</a>
+          <a href="https://maps.app.goo.gl/Gb6aaLegXB681oqd7" target="_blank" rel="noopener">Uptown Deluxe Fukuoka</a>
+          <a href="https://maps.app.goo.gl/vQm4SG4gLXRbCvFA7" target="_blank" rel="noopener">cherry</a>
+          <a href="https://maps.app.goo.gl/MWy5XER8RT5zMcYv8" target="_blank" rel="noopener">Factory market</a>
+          <a href="https://maps.app.goo.gl/VF4xuB7CSbcbneva7" target="_blank" rel="noopener">Dice&amp;Dice</a>
+        </div>
+        <p class="note">全部集中在大名・今泉那個街區，走一圈就到齊。<b>但今天量很大</b> —— 四間百貨＋岩田屋＋十三家街邊店，而 20:00 有燒肉的約。逛不完是正常的，挑想去的先走。街邊店多半 19:00–20:00 打烊。</p>
+      </div>
+    </div>
+    <div class="stop key" data-at="20:00">
+      <div class="t">20:00<em>予約</em></div>
+      <div class="c">
+        <a class="ja" href="https://maps.app.goo.gl/uCf8xWWrBnKLLCjA7" target="_blank" rel="noopener">焼肉長介</a>
+        <p class="zh">燒肉 · <b>已預約</b><a class="map" href="https://maps.app.goo.gl/uCf8xWWrBnKLLCjA7" target="_blank" rel="noopener">地図</a></p>
+        <p class="move">大名 から 徒歩 約12分（南へ 1.2km）</p>
+        <p class="note">今天第二個綁死的時間。位子不會等，逛到 19:30 就該收。</p>
+      </div>
+    </div>
+    <div class="stop flow" data-at="21:45">
+      <div class="t">夜<em>一杯</em></div>
+      <div class="c">
+        <a class="ja" href="https://maps.app.goo.gl/f9ZMYCiu41H4amyQ9" target="_blank" rel="noopener">Notime Mixology Bar</a>
+        <p class="zh">調酒 · <span class="todo">有力氣再去</span><a class="map" href="https://maps.app.goo.gl/f9ZMYCiu41H4amyQ9" target="_blank" rel="noopener">地図</a></p>
+        <p class="move">焼肉長介 から 徒歩 約12分 · Hotel Mei まで 徒歩 約6分（470m）</p>
+        <p class="note"><b>正好在回飯店的路上</b>，不用繞。走不動就直接回去 —— 明天 9/22 又是一整天購物。</p>
+      </div>
+    </div>
+  </div>
 </section>
 
 <!-- ══════════════ 四番 9.22 ══════════════ -->
 <section id="p4">
   <div class="hero">
     <span class="numeral">四番</span>
-    <p class="zone">福岡市内</p>
+    <p class="zone">博多駅・中洲</p>
     <p class="md">9.22</p>
     <p class="dow">火曜 TUE</p>
   </div>
@@ -788,7 +967,108 @@ a{color:var(--shu)}
     </div>
     <a class="map" href="https://maps.app.goo.gl/PyhaHUn1utn4BC2s5" target="_blank" rel="noopener">地図</a>
   </div>
-  <div class="track"><div class="blank"><p>行程未定</p><small>把時間、地點、交通、備註給我，我填進來。</small></div></div>
+  <div class="track">
+    <div class="stop flow" data-at="08:30">
+      <div class="t">朝<em>朝食</em></div>
+      <div class="c">
+        <a class="ja" href="https://maps.app.goo.gl/bEJauPB7PQ2adnDY6" target="_blank" rel="noopener">Pain Stock 天神</a>
+        <p class="zh">天神 · 麵包<a class="map" href="https://maps.app.goo.gl/bEJauPB7PQ2adnDY6" target="_blank" rel="noopener">地図</a></p>
+        <p class="move">Hotel Mei から 徒歩圏内 · 博多駅まで 地下鉄 天神→博多 5分</p>
+        <p class="note">商場十點才開，早餐可以慢慢吃。</p>
+      </div>
+    </div>
+    <div class="stop flow" data-at="10:00">
+      <div class="t">午前<em>買物</em></div>
+      <div class="c">
+        <a class="ja" href="https://maps.app.goo.gl/d9d8qKKautzx3ERr8" target="_blank" rel="noopener">アミュプラザ博多</a>
+        <p class="zh">JR博多シティ · 10:00–20:00<a class="map" href="https://maps.app.goo.gl/d9d8qKKautzx3ERr8" target="_blank" rel="noopener">地図</a></p>
+        <p class="move">博多駅直結</p>
+        <div class="shops">
+          <div><b>8F</b>Nintendo FUKUOKA</div>
+          <div><b>7F</b>TOWER RECORDS</div>
+          <div><b>6F</b>MUJI</div>
+          <div><b>5F</b>atmos</div>
+          <div><b>3F</b>BEAMS 博多店</div>
+        </div>
+        <p class="note"><b>一進門先上 8F 拿 Nintendo 的整理券。</b>混雜時需整理券入場，拿到的時間多半在 1 小時後 —— 先拿券，再去逛 7F 以下，時間到了回來，等待就變成購物時間。當天狀況看任天堂官方 X。<br>今天是国民の休日（連假第 4 天），商場會很擠。</p>
+      </div>
+    </div>
+    <div class="stop flow" data-at="11:30">
+      <div class="t">午前<em>買物</em></div>
+      <div class="c">
+        <a class="ja" href="https://maps.app.goo.gl/idhgRKGhzWuMfLcZ6" target="_blank" rel="noopener">AMU EST 博多</a>
+        <p class="zh">アミュプラザ と同一棟<a class="map" href="https://maps.app.goo.gl/idhgRKGhzWuMfLcZ6" target="_blank" rel="noopener">地図</a></p>
+        <p class="move">アミュプラザ から 館内移動 · 不用出建築</p>
+        <div class="shops">
+          <div><b>B1F</b>@cosme STORE アミュエスト博多店</div>
+        </div>
+        <p class="note">AMU EST 是 JR博多シティ 面向車站大廳那一側，跟アミュプラザ直接相通。</p>
+      </div>
+    </div>
+    <div class="stop flow" data-at="12:00">
+      <div class="t">昼<em>買物</em></div>
+      <div class="c">
+        <a class="ja" href="https://maps.app.goo.gl/x2HEP4KnqTQ7LjZ97" target="_blank" rel="noopener">博多丸井 OIOI</a>
+        <p class="zh">KITTE博多 · 博多駅前<a class="map" href="https://maps.app.goo.gl/x2HEP4KnqTQ7LjZ97" target="_blank" rel="noopener">地図</a></p>
+        <p class="move">AMU EST から 徒歩 約3分 · 通路直結</p>
+        <div class="shops">
+          <div><b>2F</b>Pokemon Center FUKUOKA</div>
+        </div>
+        <p class="note">アミュプラザ・AMU EST・丸井 三棟都在博多駅，全程室內走得到，中間不用搭車。</p>
+      </div>
+    </div>
+    <div class="stop flow" data-at="13:00">
+      <div class="t">昼<em>昼食</em></div>
+      <div class="c">
+        <span class="ja">昼食</span>
+        <p class="zh">博多駅周辺<span class="todo"> · 店未定</span></p>
+        <p class="note">博多駅一帶吃的選擇極多（駅地下、デイトス、KITTE 地下）。店給我我補上地圖。</p>
+      </div>
+    </div>
+    <div class="stop flow" data-at="14:30">
+      <div class="t">午後<em>買物</em></div>
+      <div class="c">
+        <a class="ja" href="https://maps.app.goo.gl/g3WaoYfh7Ku75x2C8" target="_blank" rel="noopener">ヨドバシ博多</a>
+        <p class="zh">家電・相機・模型<a class="map" href="https://maps.app.goo.gl/g3WaoYfh7Ku75x2C8" target="_blank" rel="noopener">地図</a></p>
+        <p class="move">博多丸井 から 徒歩 約5分</p>
+        <p class="note">免稅櫃台在館內，記得帶護照。</p>
+      </div>
+    </div>
+    <div class="stop flow" data-at="16:00">
+      <div class="t">午後<em>休憩</em></div>
+      <div class="c">
+        <a class="ja" href="https://maps.app.goo.gl/f2hRPzfsREqnHJSC6" target="_blank" rel="noopener">FUK COFFEE</a>
+        <p class="zh">祇園町 6-22 · 08:00–20:00<a class="map" href="https://maps.app.goo.gl/f2hRPzfsREqnHJSC6" target="_blank" rel="noopener">地図</a></p>
+        <p class="move">ヨドバシ博多 から 徒歩 約10分（770m）· キャナルシティ まで 徒歩 約6分</p>
+        <p class="note">祇園町本店 —— <b>正好卡在ヨドバシ和キャナルシティ中間</b>，順路，不用繞。早上 8 點就開，所以真的走不動也可以提前來。FUK 是福岡機場的代碼。</p>
+      </div>
+    </div>
+    <div class="stop flow" data-at="17:00">
+      <div class="t">午後<em>買物</em></div>
+      <div class="c">
+        <a class="ja" href="https://maps.app.goo.gl/ALo6zbAdSrT2UK6XA" target="_blank" rel="noopener">キャナルシティ博多 OPA</a>
+        <p class="zh">運河城<a class="map" href="https://maps.app.goo.gl/ALo6zbAdSrT2UK6XA" target="_blank" rel="noopener">地図</a></p>
+        <p class="move">FUK COFFEE から 徒歩 約8分 · 中洲まで 徒歩 約8分</p>
+        <div class="shops">
+          <div><b>B1</b>JUMP SHOP</div>
+        </div>
+        <p class="note">逛完往中洲方向走就是晚餐。</p>
+      </div>
+    </div>
+    <div class="stop flow" data-at="19:00">
+      <div class="t">夜<em>夕食</em></div>
+      <div class="c">
+        <span class="ja">中洲・今泉 二択</span>
+        <p class="zh">當天再決定</p>
+        <p class="move">キャナルシティ から 中洲 徒歩 約8分</p>
+        <div class="pick">
+          <a href="https://maps.app.goo.gl/tx7dUUpd9hL3NAju8" target="_blank" rel="noopener">中洲屋台横丁<em>屋台 · 現金多め</em></a>
+          <a href="https://maps.app.goo.gl/vpoGKt3Eek6EAYYs5" target="_blank" rel="noopener">焼鳥 と金<em>今泉 · Hotel Mei 徒歩 約10分</em></a>
+        </div>
+        <p class="note">兩家方向不同：<b>中洲屋台</b>在キャナル往北 8 分，逛完順路；<b>と金</b>在今泉，離飯店近（約 800m），適合想早點回去的話。屋台多為現金。</p>
+      </div>
+    </div>
+  </div>
 </section>
 
 <!-- ══════════════ 五番 9.23 ══════════════ -->
@@ -808,21 +1088,23 @@ a{color:var(--shu)}
     <a class="map" href="https://maps.app.goo.gl/NWLRK5cF2YtUmiGM7" target="_blank" rel="noopener">地図</a>
   </div>
   <div class="track">
-    <div class="stop flow" data-at="08:00">
-      <div class="t">朝<em>朝食</em></div>
-      <div class="c">
-        <span class="ja">朝食</span>
-        <p class="zh">春吉・天神周辺<span class="todo"> · 店未定</span></p>
-        <p class="note">要在 09:00 前吃完退房。附近店給我我補進來。</p>
-      </div>
-    </div>
-    <div class="stop key" data-at="09:00">
-      <div class="t">09:00<em>逆算</em></div>
+    <div class="stop " data-at="07:45">
+      <div class="t">07:45<em>OUT</em></div>
       <div class="c">
         <a class="ja" href="https://maps.app.goo.gl/PyhaHUn1utn4BC2s5" target="_blank" rel="noopener">Hotel Mei 博多天神</a>
         <p class="zh">退房 · 四晚結束<a class="map" href="https://maps.app.goo.gl/PyhaHUn1utn4BC2s5" target="_blank" rel="noopener">地図</a></p>
-        <p class="move">春吉 → 博多駅博多口 · タクシー 約10分 ／ 地下鉄 天神→博多 5分＋徒歩</p>
-        <p class="note">飯店 OUT 是 10:00，但取車 09:30，所以要提早退。行李直接上車，之後四天都在車上。</p>
+        <p class="move">OUT 10:00 · 提早退 · 春吉 → 博多駅前 約1km · タクシー 約5分（帶行李建議搭車）</p>
+        <p class="note">先退房再吃早餐，行李直接上車，吃完走去取車，不用再折回飯店。</p>
+      </div>
+    </div>
+    <div class="stop flow" data-at="08:00">
+      <div class="t">朝<em>朝食</em></div>
+      <div class="c">
+        <a class="ja" href="https://maps.app.goo.gl/vKBoAyRpMEV1Fovs5" target="_blank" rel="noopener">DACOMECCA ダコメッカ</a>
+        <p class="zh">博多駅前 4-14-1 · 07:00–19:00<a class="map" href="https://maps.app.goo.gl/vKBoAyRpMEV1Fovs5" target="_blank" rel="noopener">地図</a></p>
+        <p class="move">Hotel Mei から 約1km · ORIX 博多駅博多口まで 徒歩 約6分（442m）· 有モーニングプレート</p>
+        <p class="note">アマムダコタン、I'm donut? 的姊妹店，<b>從清早就開始排隊</b>。09:30 要取車，抓 1 小時 30 分。
+        排太久就外帶上車吃 —— 今天要開快 3 小時，車上有東西吃反而好。<b>不定休</b>，出發前看一下 Instagram @dacomecca。</p>
       </div>
     </div>
     <div class="stop key" data-at="09:30">
@@ -830,7 +1112,7 @@ a{color:var(--shu)}
       <div class="c">
         <a class="ja" href="https://www.google.com/maps/search/?api=1&amp;query=%E3%82%AA%E3%83%AA%E3%83%83%E3%82%AF%E3%82%B9%E3%83%AC%E3%83%B3%E3%82%BF%E3%82%AB%E3%83%BC%20%E5%8D%9A%E5%A4%9A%E9%A7%85%E5%8D%9A%E5%A4%9A%E5%8F%A3%E5%BA%97" target="_blank" rel="noopener">ORIX レンタカー 博多駅博多口店</a>
         <p class="zh">取車 · SA CLASS 小型車<a class="map" href="https://www.google.com/maps/search/?api=1&amp;query=%E3%82%AA%E3%83%AA%E3%83%83%E3%82%AF%E3%82%B9%E3%83%AC%E3%83%B3%E3%82%BF%E3%82%AB%E3%83%BC%20%E5%8D%9A%E5%A4%9A%E9%A7%85%E5%8D%9A%E5%A4%9A%E5%8F%A3%E5%BA%97" target="_blank" rel="noopener">地図</a></p>
-        <p class="move">要帶：台灣駕照正本＋日文譯本＋護照＋信用卡</p>
+        <p class="move">DACOMECCA から 徒歩 約6分 · 要帶：台灣駕照正本＋日文譯本＋護照＋信用卡</p>
         <p class="note">建議借 ETC 卡，接下來四天九州道＋長崎道＋大分道收費站很多。順便確認油種與滿油返還規定。</p>
       </div>
     </div>
@@ -1021,12 +1303,14 @@ a{color:var(--shu)}
         <p class="note">僅 8 室的小旅宿，IN 15:00／OUT 10:00。到得晚的話先打電話說一聲比較好。</p>
       </div>
     </div>
-    <div class="stop flow" data-at="19:00">
-      <div class="t">夜<em>夕食</em></div>
+    <div class="stop " data-at="19:00">
+      <div class="t">19:00<em>夕食</em></div>
       <div class="c">
-        <span class="ja">夕食</span>
-        <p class="zh">由布院<span class="todo"> · 店未定</span></p>
-        <p class="note">豊の国 自己有餐廳「洋灯舎」，要吃得先預約。若要外食注意由布院晚上收得早，很多店 20:00–21:00 就關 —— 這天到得晚，先訂比較保險。</p>
+        <a class="ja" href="https://maps.app.goo.gl/YZq8HyKLZPgNBddf6" target="_blank" rel="noopener">Pizzeria 櫟の丘</a>
+        <p class="zh">窯烤 pizza · 湯布院町川北 893-1<a class="map" href="https://maps.app.goo.gl/YZq8HyKLZPgNBddf6" target="_blank" rel="noopener">地図</a></p>
+        <p class="move">豊の国 から 車 約10分（3.9km）· 夜 17:30–<b>20:00 LO</b> · 定休 水曜 → 9/24 是週四，有開 · 駐車 40–50台 · <a class="tel" href="tel:+81977854007">0977-85-4007</a></p>
+        <p class="note"><b>LO 是 20:00，只有一小時。</b>先入住再開過去的話，19:00 到店、20:00 前點完，可以但不寬裕 —— 而今天最大的變數是吊橋。
+        <br><br>替代方案：<b>櫟の丘就在吊橋回豊の国的路上</b>（吊橋 14km → 櫟の丘 3.9km → 豊の国）。先吃再入住，18:00 就能到店（17:30 開），時間多一小時，而且省掉來回 7.8km。要不要改看你們。</p>
       </div>
     </div>
   </div>
