@@ -337,6 +337,35 @@ dl{margin:0}
   font-variant-numeric:tabular-nums; color:var(--shu); padding-top:1px;
 }
 
+/* When to walk out the door for an unhurried version of this day. Sits between
+   the hero and 宿 — the two day-level facts you check before anything else.
+   Ink badge, not 朱: 宿 owns 朱, and 朱 is reserved for things that break. */
+.depart{
+  display:flex; align-items:flex-start; gap:11px;
+  padding:11px var(--pad) 12px;
+  border-bottom:1px solid var(--hair);
+}
+.depart .dg{
+  flex:0 0 25px; height:25px; line-height:26px; text-align:center;
+  font-family:var(--mincho); font-size:15px; font-weight:700;
+  color:var(--paper); background:var(--ink);
+}
+.depart .db{flex:1; min-width:0}
+/* direct child only — a <b> used for emphasis inside the note must not
+   inherit the clock's 21px (same trap as .warn b, fixed the same way) */
+.depart .db>b{
+  font-family:var(--num); font-size:21px; font-weight:800;
+  font-variant-numeric:tabular-nums; letter-spacing:-.02em; line-height:1.1;
+}
+.depart .db i{
+  font-style:normal; font-family:var(--tc); font-size:12px; font-weight:600;
+  letter-spacing:.08em; margin-left:8px; color:var(--gray);
+}
+.depart .db p{
+  font-family:var(--tc); font-size:11.5px; font-weight:400; line-height:1.6;
+  letter-spacing:.03em; color:var(--gray); margin:3px 0 0;
+}
+
 /* a caution that has to survive being skimmed */
 .warn{
   margin:13px 0 2px; padding:11px 13px 12px;
@@ -577,6 +606,13 @@ a{color:var(--shu)}
     <p class="md">9.19</p>
     <p class="dow">土曜 SAT</p>
   </div>
+  <div class="depart">
+    <span class="dg">発</span>
+    <div class="db">
+      <b>03:30</b><i>自宅出発 · 桃園 T2 04:40 着</i>
+      <p>CI110 06:50 発、國際線報到抓提前 2 小時 → <b>T2 要在 04:50 前到</b>。<br>機捷首班到 T2 已 06:40，趕不上。1819 國光客運 24 小時營運、台北車站→機場約 55–70 分，03:30 出門約 04:40 到，還有 10 分鐘緩衝。<br>叫車的話約 40 分，04:00 出門也行 —— 但凌晨叫車不確定性高，這是全程唯一「錯過就整趟報銷」的時刻，寬鬆一點值得。</p>
+    </div>
+  </div>
   <div class="lodge">
     <span class="lg">宿</span>
     <div class="lb">
@@ -674,6 +710,14 @@ a{color:var(--shu)}
     <p class="md">9.20</p>
     <p class="dow">日曜 SUN</p>
   </div>
+  <div class="depart">
+    <span class="dg">発</span>
+    <div class="db">
+      <b>07:30</b><i>ホテル出発 · 唐戸市場 08:55 着</i>
+      <p>門到門約 1 小時 25 分（步行→七隈線→新幹線→JR→関門汽船，含轉乘等車）。<br>
+      抓這個時間的理由：<b>唐戸市場賣完就收</b>，九點前到選擇還多；而潮風号班距疏，早一點就不必追班次。晚餐 19:30 有約，前面留約 2 小時餘裕。</p>
+    </div>
+  </div>
   <div class="lodge">
     <span class="lg">宿</span>
     <div class="lb">
@@ -683,7 +727,7 @@ a{color:var(--shu)}
     <a class="map" href="https://maps.app.goo.gl/PyhaHUn1utn4BC2s5" target="_blank" rel="noopener">地図</a>
   </div>
   <div class="track">
-    <div class="stop flow" data-at="07:45">
+    <div class="stop flow" data-at="07:30">
       <div class="t">朝<em>出発</em></div>
       <div class="c">
         <span class="ja">渡辺通 → 門司港 → 唐戸</span>
@@ -809,6 +853,13 @@ a{color:var(--shu)}
     <p class="zone">天神・大名</p>
     <p class="md">9.21</p>
     <p class="dow">月曜 MON</p>
+  </div>
+  <div class="depart">
+    <span class="dg">発</span>
+    <div class="db">
+      <b>08:00</b><i>ホテル出発 · Sabataro 08:20 着</i>
+      <p>Sabataro <b>08:30 已預約</b>，離飯店 1.7km、走路約 20 分。<br>08:00 出門走過去約 08:20 到，10 分鐘緩衝。趕不及就叫車（約 7 分）。<br>百貨十點才開，所以早餐後其實還有空檔 —— <b>這是全程最輕鬆的早晨</b>。</p>
+    </div>
   </div>
   <div class="lodge">
     <span class="lg">宿</span>
@@ -959,6 +1010,13 @@ a{color:var(--shu)}
     <p class="md">9.22</p>
     <p class="dow">火曜 TUE</p>
   </div>
+  <div class="depart">
+    <span class="dg">発</span>
+    <div class="db">
+      <b>08:30</b><i>ホテル出発 · アミュプラザ 09:55 着</i>
+      <p>這天真正的錨點是 <b>アミュプラザ 10:00 開門那一刻要上 8F 拿 Nintendo 整理券</b>。<br>Pain Stock 離飯店約 800m（走 10 分），吃完走天神駅→地下鉄→博多駅約 15 分。08:30 出門 → 早餐約 50 分 → 09:55 到館，剛好開門。<br>Pain Stock 開店時間請先確認，太早到會等。</p>
+    </div>
+  </div>
   <div class="lodge">
     <span class="lg">宿</span>
     <div class="lb">
@@ -1078,6 +1136,13 @@ a{color:var(--shu)}
     <p class="zone">佐賀太良・小浜温泉</p>
     <p class="md">9.23</p>
     <p class="dow">水曜 WED</p>
+  </div>
+  <div class="depart">
+    <span class="dg">発</span>
+    <div class="db">
+      <b>07:45</b><i>退房 · ORIX 09:30 取車</i>
+      <p><b>DACOMECCA 從清早就排隊</b>，而取車 09:30 不能遲。<br>07:45 退房 → 08:00 到店（07:00 開）→ 走 6 分到 ORIX，前後有 1 小時 30 分。排太久就外帶上車吃，今天要開快 3 小時。<br>帶行李那 1km 建議叫車（約 5 分）。</p>
+    </div>
   </div>
   <div class="lodge">
     <span class="lg">宿</span>
@@ -1208,6 +1273,13 @@ a{color:var(--shu)}
     <p class="md">9.24</p>
     <p class="dow">木曜 THU</p>
   </div>
+  <div class="depart">
+    <span class="dg">発</span>
+    <div class="db">
+      <b>09:15</b><i>車 出発 · 朝食は 08:00 に徒歩で</i>
+      <p>今天全部從 <b>13:05 的渡輪</b>回推（車輛要提前 20 分到港排隊）：<br>多比良港 12:45 ← 大三東駅 12:30 ← 姫松屋 12:15（午餐 11:15 起）← 雲仙 10:45（地獄步道約 1 小時）← <b>小浜 09:15 発</b>。<br>早餐 Pack 離伊勢屋只有 450m，08:00 走過去，車先不用動。<br>搭 13:55 那班的話吊橋只剩 20 分鐘餘裕 —— 09:15 這個數字就是為了不用賭。</p>
+    </div>
+  </div>
   <div class="lodge">
     <span class="lg">宿</span>
     <div class="lb">
@@ -1324,6 +1396,13 @@ a{color:var(--shu)}
     <p class="md">9.25</p>
     <p class="dow">金曜 FRI</p>
   </div>
+  <div class="depart">
+    <span class="dg">発</span>
+    <div class="db">
+      <b>08:45</b><i>宿を出る · 湯の坪街道 09:00 着</i>
+      <p><b>全程最寬裕的一天</b>，車程加起來不到 20km。<br>唯一的鐘點是「心」10:30 開店 —— 想搶第一輪就 10:15 到店門口。<br>豊の国、湯の坪街道、「心」三個點全在 1.3km 內，<b>早上走路就好，車留在旅宿</b>。纜車上り最終 17:00，你 14:00 就到，完全沒壓力。</p>
+    </div>
+  </div>
   <div class="lodge">
     <span class="lg">宿</span>
     <div class="lb">
@@ -1414,6 +1493,13 @@ a{color:var(--shu)}
     <p class="zone">宇佐・玖珠・日田</p>
     <p class="md">9.26</p>
     <p class="dow">土曜 SAT</p>
+  </div>
+  <div class="depart">
+    <span class="dg">発</span>
+    <div class="db">
+      <b>08:00</b><i>退房 · 日田 14:30 発が絶対</i>
+      <p>倒推自 CI129 19:10：報到 17:10 ← 接駁 25 分 ← 還車 20 分 ← 加油 15 分 ← 車程 1 小時 20 分 → <b>日田 14:30 発</b>。<br>往前推：日田 12:45 ← 玖珠 11:45 ← 動物園 09:50（週六，入口可能排隊，抓 1 小時 10 分）← tsuchiumu 08:30（開店同時）← <b>08:00 退房</b>。<br>先退房再吃早餐就是為了省掉一趟上山，那 30 分鐘全部變成緩衝。</p>
+    </div>
   </div>
   <div class="track">
     <div class="stop " data-at="08:00">
