@@ -48,6 +48,9 @@
 }
 
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+/* a class with its own display always outranks the UA rule for [hidden],
+   so state it once here instead of patching every element that hides */
+[hidden]{display:none!important}
 html{-webkit-text-size-adjust:100%}
 body{
   margin:0; background:var(--paper); color:var(--ink);
@@ -366,6 +369,65 @@ dl{margin:0}
   letter-spacing:.03em; color:var(--gray); margin:3px 0 0;
 }
 
+/* ---------------- 勘定 — a calculator, not a ledger ----------------
+   Nothing is stored except the exchange rate; if storage is unavailable it
+   simply falls back to the default. Money that must survive the trip belongs
+   in whatever ledger Wayne actually keeps, not in this file. */
+/* the 手引 cards define a generic .row{display:flex}; override it here or the
+   labels sit beside their inputs and [hidden] loses to the class rule */
+.calc .row{display:block; margin:0 0 15px}
+.calc label{
+  display:block; font-family:var(--tc); font-size:11.5px; font-weight:600;
+  letter-spacing:.1em; color:var(--gray); margin:0 0 6px;
+}
+.calc input,.calc select{
+  width:100%; box-sizing:border-box; border-radius:0; -webkit-appearance:none;
+  border:2px solid var(--ink); background:var(--paper); color:var(--ink);
+  padding:10px 12px;
+}
+.calc input{
+  font-family:var(--num); font-size:25px; font-weight:800;
+  font-variant-numeric:tabular-nums; letter-spacing:-.02em;
+}
+.calc .rate input{font-size:18px}
+.calc select{font-family:var(--jp); font-size:14.5px; font-weight:600}
+.calc input:focus,.calc select:focus{outline:3px solid var(--shu); outline-offset:-3px}
+
+.res{display:grid; grid-template-columns:1fr 1fr; gap:2px; margin:2px 0 0}
+.res>div{background:var(--paper); border:1px solid var(--hair); padding:10px 12px}
+.res span{
+  display:block; font-family:var(--tc); font-size:10.5px; font-weight:600;
+  letter-spacing:.1em; color:var(--gray); margin-bottom:4px;
+}
+.res b{
+  font-family:var(--num); font-size:21px; font-weight:800;
+  font-variant-numeric:tabular-nums; letter-spacing:-.02em; line-height:1.1;
+}
+/* the halves are the answer you actually want, so they get the ink block */
+.res>div.hi{background:var(--ink); border-color:var(--ink)}
+.res>div.hi span{color:var(--shu)}
+.res>div.hi b{color:var(--paper)}
+
+.quick{
+  display:flex; flex-wrap:wrap; gap:5px 14px; margin:14px 0 0;
+  font-family:var(--num); font-size:12px; font-weight:600;
+  font-variant-numeric:tabular-nums; color:var(--gray);
+}
+.quick i{font-style:normal; color:var(--ink); font-weight:800}
+
+.outline{
+  font-family:var(--tc); font-size:13px; line-height:1.65; color:var(--ink);
+  border-left:3px solid var(--shu); padding:9px 0 9px 12px; margin:14px 0 0;
+  word-break:break-all; -webkit-user-select:all; user-select:all;
+}
+.cpy{
+  display:flex; align-items:center; justify-content:center; gap:9px;
+  width:100%; box-sizing:border-box; margin:12px 0 0; padding:12px;
+  border:2px solid var(--ink); background:transparent; cursor:pointer;
+  font-family:var(--tc); font-size:13.5px; font-weight:700; letter-spacing:.08em;
+  color:var(--ink);
+}
+
 /* a caution that has to survive being skimmed */
 .warn{
   margin:13px 0 2px; padding:11px 13px 12px;
@@ -448,6 +510,7 @@ a{color:var(--shu)}
 <input type="radio" name="d" id="t7" aria-label="七番山笠 9月25日">
 <input type="radio" name="d" id="t8" aria-label="八番山笠 9月26日">
 <input type="radio" name="d" id="t9" aria-label="運転 自駕須知">
+<input type="radio" name="d" id="t10" aria-label="勘定 換算與分攤">
 
 <div class="mast">
   <span class="mark">九州馳之旅</span>
@@ -465,6 +528,7 @@ a{color:var(--shu)}
   <label for="t7"><span class="glyph">七</span><span class="sm">9.25</span></label>
   <label for="t8"><span class="glyph">八</span><span class="sm">9.26</span></label>
   <label for="t9"><span class="glyph">運転</span><span class="sm">DRIVE</span></label>
+  <label for="t10"><span class="glyph">勘定</span><span class="sm">SPLIT</span></label>
 </nav>
 
 <main class="panels">
@@ -1718,6 +1782,68 @@ a{color:var(--shu)}
   </div>
 </section>
 
+
+<!-- ══════════════ 勘定 ══════════════ -->
+<section id="p10">
+  <div class="brief">
+
+    <div class="card">
+      <h2>換 算<i>日幣 → 台幣 · 除以 2</i></h2>
+      <div class="calc">
+        <div class="row rate">
+          <label>レート · 1 日圓 = ? 台幣</label>
+          <input id="rate" type="text" inputmode="decimal" value="0.21">
+        </div>
+        <div class="row">
+          <label>金額 · 日圓</label>
+          <input id="amt" type="text" inputmode="numeric" placeholder="8400">
+        </div>
+        <div class="res">
+          <div><span>合計 JPY</span><b id="r1">¥0</b></div>
+          <div class="hi"><span>各 JPY</span><b id="r2">¥0</b></div>
+          <div><span>合計 TWD</span><b id="r3">NT$0</b></div>
+          <div class="hi"><span>各 TWD</span><b id="r4">NT$0</b></div>
+        </div>
+        <div class="quick">
+          <span>¥1,000 <i id="q0">—</i></span>
+          <span>¥3,000 <i id="q1">—</i></span>
+          <span>¥5,000 <i id="q2">—</i></span>
+          <span>¥10,000 <i id="q3">—</i></span>
+        </div>
+      </div>
+      <div class="warn">
+        <b>匯率要自己更新</b>
+        這份檔案刻意零外部請求（離線也要能讀），所以不抓即時匯率。
+        出發前查一次台銀現金賣出，把上面那格改掉就好 —— 改過會記在這支手機上。
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>明 細<i>複製到你的帳本</i></h2>
+      <div class="calc">
+        <div class="row">
+          <label>哪一筆 · 清單由行程自動生成</label>
+          <select id="who"></select>
+          <p class="lzh" id="autohint" hidden></p>
+        </div>
+        <div class="row" id="freerow" hidden>
+          <label>自己填</label>
+          <input id="free" type="text" style="font-family:var(--jp);font-size:15px;font-weight:600" placeholder="例：ヨドバシ博多">
+        </div>
+      </div>
+      <div class="outline" id="outline">輸入金額後，這裡會產生可複製的一行。</div>
+      <button class="cpy" id="cpy" type="button"><span>複製這一行</span></button>
+      <p class="lzh" id="nocpy" hidden>這份是用檔案 App 開的（<code>file://</code>），瀏覽器不允許自動複製。上面那行長按可以全選複製。</p>
+      <div class="warn">
+        <b>這裡不會幫你記帳</b>
+        頁面只負責算，不負責存 —— 靜態檔沒辦法跟 Cindia 同步，資料掉了比沒記更糟。
+        算完貼到你們真正記帳的地方（備忘錄或共享試算表）。
+      </div>
+    </div>
+
+  </div>
+</section>
+
 </main>
 
 <style>
@@ -1727,18 +1853,20 @@ a{color:var(--shu)}
 #t4:checked~.rail label[for=t4],#t5:checked~.rail label[for=t5],
 #t6:checked~.rail label[for=t6],#t7:checked~.rail label[for=t7],
 #t8:checked~.rail label[for=t8],
-#t9:checked~.rail label[for=t9]{background:var(--ink);color:var(--paper)}
+#t9:checked~.rail label[for=t9],
+#t10:checked~.rail label[for=t10]{background:var(--ink);color:var(--paper)}
 
 #t0:checked~.rail label[for=t0] .sm,#t1:checked~.rail label[for=t1] .sm,
 #t2:checked~.rail label[for=t2] .sm,#t3:checked~.rail label[for=t3] .sm,
 #t4:checked~.rail label[for=t4] .sm,#t5:checked~.rail label[for=t5] .sm,
 #t6:checked~.rail label[for=t6] .sm,#t7:checked~.rail label[for=t7] .sm,
 #t8:checked~.rail label[for=t8] .sm,
-#t9:checked~.rail label[for=t9] .sm{color:var(--shu)}
+#t9:checked~.rail label[for=t9] .sm,
+#t10:checked~.rail label[for=t10] .sm{color:var(--shu)}
 
 #t0:checked~.panels #p0,#t1:checked~.panels #p1,#t2:checked~.panels #p2,
 #t3:checked~.panels #p3,#t4:checked~.panels #p4,#t5:checked~.panels #p5,
-#t6:checked~.panels #p6,#t7:checked~.panels #p7,#t8:checked~.panels #p8,#t9:checked~.panels #p9{display:block}
+#t6:checked~.panels #p6,#t7:checked~.panels #p7,#t8:checked~.panels #p8,#t9:checked~.panels #p9,#t10:checked~.panels #p10{display:block}
 
 /* keyboard focus stays visible even though the radios are hidden */
 #t0:focus-visible~.rail label[for=t0],#t1:focus-visible~.rail label[for=t1],
@@ -1746,7 +1874,8 @@ a{color:var(--shu)}
 #t4:focus-visible~.rail label[for=t4],#t5:focus-visible~.rail label[for=t5],
 #t6:focus-visible~.rail label[for=t6],#t7:focus-visible~.rail label[for=t7],
 #t8:focus-visible~.rail label[for=t8],
-#t9:focus-visible~.rail label[for=t9]{outline:3px solid var(--shu);outline-offset:-3px}
+#t9:focus-visible~.rail label[for=t9],
+#t10:focus-visible~.rail label[for=t10]{outline:3px solid var(--shu);outline-offset:-3px}
 </style>
 
 <script>
@@ -1806,6 +1935,110 @@ a{color:var(--shu)}
   }
   next ? track.insertBefore(line, next) : track.appendChild(line);
   setTimeout(function(){ line.scrollIntoView({block:'center'}); }, 380);
+})();
+</script>
+
+<script>
+/* 勘定. Pure arithmetic plus one remembered value (the rate). The payer list is
+   built from the stops already in this document, so it never needs maintaining.
+   Enhancement only: if this never runs, the tab still reads as a static page. */
+(function () {
+  'use strict';
+  var rate = document.getElementById('rate'), amt = document.getElementById('amt');
+  if (!rate || !amt) return;
+  var who = document.getElementById('who'), free = document.getElementById('free'),
+      freerow = document.getElementById('freerow'), out = document.getElementById('outline'),
+      btn = document.getElementById('cpy');
+
+  try { var v = localStorage.getItem('jpytwd'); if (v) rate.value = v; } catch (e) {}
+
+  var SPEND = ['朝食','昼食','夕食','予約','休憩','一杯','二次会'];
+  Array.prototype.forEach.call(document.querySelectorAll('.panels>section'), function (sec) {
+    var md = sec.querySelector('.md');
+    if (!md) return;
+    Array.prototype.forEach.call(sec.querySelectorAll('.stop'), function (st) {
+      var em = st.querySelector('.t em'), ja = st.querySelector('.ja');
+      if (!em || !ja || SPEND.indexOf(em.textContent.trim()) < 0) return;
+      var o = document.createElement('option');
+      var at = st.getAttribute('data-at');
+      o.textContent = md.textContent + ' ' + at + ' ' + ja.textContent.trim();
+      /* MMDDhhmm — fixed width, so plain string compare orders it correctly.
+         Safe here because the whole trip sits inside one month. */
+      var d = md.textContent.split('.');
+      o.dataset.ts = ('0' + d[0]).slice(-2) + ('0' + d[1]).slice(-2) + at.replace(':', '');
+      who.appendChild(o);
+    });
+  });
+  var other = document.createElement('option');
+  other.value = '__free'; other.textContent = 'その他（自由入力）';
+  who.appendChild(other);
+
+  function n(x) { return (Math.round(x) || 0).toLocaleString('en-US'); }
+
+  function draw() {
+    var r = parseFloat(rate.value) || 0, y = parseFloat(amt.value) || 0, t = y * r;
+    document.getElementById('r1').textContent = '\u00a5' + n(y);
+    document.getElementById('r2').textContent = '\u00a5' + n(y / 2);
+    document.getElementById('r3').textContent = 'NT$' + n(t);
+    document.getElementById('r4').textContent = 'NT$' + n(t / 2);
+    [1000, 3000, 5000, 10000].forEach(function (v, i) {
+      document.getElementById('q' + i).textContent = 'NT$' + n(v * r);
+    });
+    var label = who.value === '__free' ? (free.value.trim() || '\u2014') : who.value;
+    out.textContent = y
+      ? label + ' \u00b7 \u00a5' + n(y) + ' \u00b7 \u5404 \u00a5' + n(y / 2)
+        + ' \u00b7 NT$' + n(t) + ' \u00b7 \u5404 NT$' + n(t / 2)
+      : '\u8f38\u5165\u91d1\u984d\u5f8c\uff0c\u9019\u88e1\u6703\u7522\u751f\u53ef\u8907\u88fd\u7684\u4e00\u884c\u3002';
+    try { localStorage.setItem('jpytwd', rate.value); } catch (e) {}
+  }
+
+  [rate, amt, free].forEach(function (el) { el.addEventListener('input', draw); });
+
+  /* You pay after you eat, so the useful default is the latest entry that has
+     already passed. Before the trip nothing has, so it stays on the first. */
+  var hint = document.getElementById('autohint'), touched = false;
+  function autopick() {
+    if (touched) return;
+    var n = new Date(), p = function (x) { return ('0' + x).slice(-2); };
+    var nowTs = p(n.getMonth() + 1) + p(n.getDate()) + p(n.getHours()) + p(n.getMinutes());
+    var best = -1;
+    Array.prototype.forEach.call(who.options, function (o, i) {
+      if (o.dataset.ts && o.dataset.ts <= nowTs) best = i;
+    });
+    if (best < 0) { hint.hidden = true; return; }
+    who.selectedIndex = best;
+    freerow.hidden = true;
+    hint.textContent = '\u5df2\u4f9d\u73fe\u5728\u6642\u9593 ' + p(n.getMonth() + 1) + '/' + p(n.getDate())
+      + ' ' + p(n.getHours()) + ':' + p(n.getMinutes()) + ' \u9810\u9078\u6700\u8fd1\u4e00\u7b46\uff0c\u53ef\u4ee5\u81ea\u5df1\u6539\u3002';
+    hint.hidden = false;
+    draw();
+  }
+  who.addEventListener('change', function () {
+    touched = true;
+    hint.hidden = true;
+    freerow.hidden = who.value !== '__free';
+    draw();
+  });
+  /* the page may have loaded hours before this tab is opened — recompute then,
+     unless the choice has already been made by hand */
+  var tab = document.getElementById('t10');
+  if (tab) tab.addEventListener('change', autopick);
+  autopick();
+
+  /* clipboard needs a secure context — the Files.app copy is file:// and has none */
+  if (navigator.clipboard && window.isSecureContext) {
+    btn.addEventListener('click', function () {
+      navigator.clipboard.writeText(out.textContent).then(function () {
+        var s = btn.querySelector('span'), old = s.textContent;
+        s.textContent = '\u5df2\u8907\u88fd';
+        setTimeout(function () { s.textContent = old; }, 1400);
+      });
+    });
+  } else {
+    btn.hidden = true;
+    document.getElementById('nocpy').hidden = false;
+  }
+  draw();
 })();
 </script>
 </body>
