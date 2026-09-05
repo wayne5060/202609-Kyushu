@@ -551,7 +551,7 @@ a{color:var(--shu)}
       <div class="warn">
         <b>你撞上 11 年來第一次的五連休</b>
         9/19–9/23 全日本連假，等於你前五天都在人潮尖峰。
-        影響：景點與餐廳大排長龍、想吃的店最好先訂、鳥栖 Outlet（9/19 週六）會非常擠、
+        影響：景點與餐廳大排長龍、想吃的店最好先訂、
         9/23 取車上高速可能塞車 —— 福岡→小浜温泉 我估的 2.5–3 小時要往上加。
         <br><br>
         反過來有兩個好處：<b>唐戸市場</b>週日祝日 08:00 就開（平日要 10:00），
@@ -2121,6 +2121,57 @@ a{color:var(--shu)}
     document.getElementById('nocpy').hidden = false;
   }
   draw();
+})();
+</script>
+<script>
+/* Swipe the content area to change tabs. Enhancement only — the rail still
+   works, and without JS nothing here is missed.                          */
+(function () {
+  'use strict';
+  var tabs   = document.querySelectorAll('input[name=d]'),
+      panels = document.querySelector('.panels');
+  if (!tabs.length || !panels) return;
+
+  /* Tapping the rail and swiping both land here, so they behave the same:
+     keep the active tab visible in the (horizontally scrolling) rail, and
+     start the new day at the top instead of wherever the last one was
+     scrolled to. Load-time selection sets .checked directly and fires no
+     change event, so the 現在 line keeps its own scroll. */
+  function selected(i) {
+    var lbl = document.querySelector('.rail label[for=' + tabs[i].id + ']');
+    if (lbl) lbl.scrollIntoView({ inline: 'center', block: 'nearest' });
+    window.scrollTo(0, 0);
+  }
+  Array.prototype.forEach.call(tabs, function (r, i) {
+    r.addEventListener('change', function () { if (r.checked) selected(i); });
+  });
+
+  var x0 = null, y0 = 0;
+
+  panels.addEventListener('touchstart', function (e) {
+    if (e.touches.length !== 1) { x0 = null; return; }
+    var t = e.touches[0];
+    // iOS reserves the screen edges for its own back/forward swipe.
+    if (t.clientX < 24 || t.clientX > window.innerWidth - 24) { x0 = null; return; }
+    x0 = t.clientX; y0 = t.clientY;
+  }, { passive: true });
+
+  panels.addEventListener('touchend', function (e) {
+    if (x0 === null) return;
+    var t = e.changedTouches[0], dx = t.clientX - x0, dy = t.clientY - y0;
+    x0 = null;
+    // Must be a deliberate, mostly-horizontal move, or vertical scrolling
+    // that drifts sideways would flip the day out from under you.
+    if (Math.abs(dx) < 60 || Math.abs(dx) < Math.abs(dy) * 1.5) return;
+
+    var i = -1, j;
+    for (var k = 0; k < tabs.length; k++) if (tabs[k].checked) { i = k; break; }
+    j = i + (dx < 0 ? 1 : -1);          // swipe left = next day
+    if (i < 0 || j < 0 || j >= tabs.length) return;   // no wrap at the ends
+
+    tabs[j].checked = true;
+    tabs[j].dispatchEvent(new Event('change', { bubbles: true }));
+  }, { passive: true });
 })();
 </script>
 </body>
